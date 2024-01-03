@@ -1,7 +1,7 @@
 # PatienceOS
 A baremetal C# kernel.
 
-The repo name has been chosen to remind Frank this is a 12 month initial project (at least), as part of his 2024 professional development goals. The domamine hit from quickly pushing out PR's, like he regularly gets from contributing to other OSS repos, simply won't be possible. Hence the need for patience, and perseverance.
+The repo name has been chosen to remind Frank this is a 12 month initial project (at least), as part of his [2024 professional development](https://frankray.net/blog/2023/11/writing-an-os-in-csharp-dotnet/) goals. The domamine hit from quickly pushing out PR's, like he regularly gets from contributing to other OSS repos, simply won't be possible. Hence the need for patience, and perseverance.
 
 ## Objectives
 A working set of things to achieve:
