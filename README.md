@@ -17,5 +17,10 @@ Before running, `src\build.cmd`, ensure the following:
 2. ILC, the Native .Net AOT compiler, needs to be installed locally eg. `dotnet add package Microsoft.DotNet.ILCompiler --version 7.0.14`
 3. The path to ILC needs to be set as an environment variable called `ILCPATH` eg. `setx ILCPATH "C:\Users\frank\.nuget\packages\runtime.win-x64.microsoft.dotnet.ilcompiler\7.0.14\tools"` (no trailing slash)
 
+## Instructions
+
+1. Open `x86 Native Tools Command Prompt for VS 2022`, change to `src` and run `build.cmd`
+2. 
+
 ## Notes
 Targeting machine-specific architectures can be done at the compiler call (eg. `csc /platform:x64`) and/or the linker call (eg. `link /machine:x64`)
