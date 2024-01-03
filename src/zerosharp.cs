@@ -119,40 +119,23 @@ namespace Internal.Runtime.CompilerHelpers
 
 unsafe class Program
 {
-    [DllImport("libc")]
-    static extern int printf(byte* fmt);
-
-    [DllImport("kernel32")]
-    static extern IntPtr GetStdHandle(int nStdHandle);
-
-    [DllImport("kernel32")]
-    static extern IntPtr WriteConsoleW(IntPtr hConsole, void* lpBuffer, int charsToWrite, out int charsWritten, void* reserved);
-
-#if !WINDOWS
-    // Export this as "main" so that we can link with the C runtime library properly.
-    // If the C runtime library is not initialized we can't even printf.
-    // This is not needed on Windows because we don't call the C runtime.
-    [RuntimeExport("main")]
-#endif
-    static int Main()
-    {
-        string hello = "Hello world!\n";
-        fixed (char* pHello = hello)
+        static int pos = 0;
+ 
+        unsafe static void Main()
         {
-#if WINDOWS
-            WriteConsoleW(GetStdHandle(-11), pHello, hello.Length, out int _, null);
-#else
-            // Once C# has support for UTF-8 string literals, this can be simplified.
-            // https://github.com/dotnet/csharplang/issues/2911
-            // Since we don't have that, convert from UTF-16 to ASCII.
-            byte* pHelloASCII = stackalloc byte[hello.Length + 1];
-            for (int i = 0; i < hello.Length; i++)
-                pHelloASCII[i] = (byte)pHello[i];
-
-            printf(pHelloASCII);
-#endif
+            // Clear the screen
+            for(int i = 0; i < 80 * 25 * 2; i++)
+                *(byte *)(0xb8000 + i) = 0;
+ 
+            // Say hi
+            Print('H');
+            Print('i');
         }
-
-        return 42;
-    }
+ 
+        unsafe static void Print(char c)
+        {
+            *(byte *)(0xb8000 + pos) = (byte)c;
+            *(byte *)(0xb8000 + pos + 1) = 0x0f;
+            pos += 2;
+        }
 }
