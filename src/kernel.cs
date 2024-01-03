@@ -1,3 +1,9 @@
+//The contents of this file, at least down to 'unsafe class Program'
+//was taken verbatim from the excellent ZeroSharp project, 
+//namely from here: https://github.com/MichalStrehovsky/zerosharp/blob/master/no-runtime/zerosharp.cs
+
+//TODO: split out the ZeroSharp logic into it's own cs file, so the kernel logic is separate.
+
 using System;
 using System.Runtime;
 using System.Runtime.InteropServices;
