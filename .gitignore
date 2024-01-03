@@ -3,6 +3,9 @@
 *.exe
 *.ilexe
 *.map
+*.o
+*.bin
+*.elf
 
 
 ## Ignore Visual Studio temporary files, build results, and

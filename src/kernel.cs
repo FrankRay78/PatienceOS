@@ -129,8 +129,11 @@ unsafe class Program
  
             // Say hi
             Print('H');
-            Print('i');
-        }
+            Print('e');
+            Print('l');
+            Print('l');
+            Print('o');
+    }
  
         unsafe static void Print(char c)
         {

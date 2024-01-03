@@ -1,20 +1,34 @@
-global sthrow
- 
-extern kmain
- 
+; kernel.asm
+bits 32           ; nasm directive - 32 bit
+
+extern __managed__Main
+
+global _start
+
 MODULEALIGN       equ     1<<0
 MEMINFO           equ     1<<1
 FLAGS             equ     MODULEALIGN | MEMINFO
 MAGIC             equ     0x1BADB002
 CHECKSUM          equ     -(MAGIC + FLAGS)
- 
+
 section .text
- 
-align 4
-dd MAGIC
-dd FLAGS
-dd CHECKSUM
- 
-sthrow:
+    ; Multiboot header
+    align 4
+    dd MAGIC
+    dd FLAGS
+    dd CHECKSUM
+
+_start:
+    cli                   ; block interrupts
+    mov esp, stack_space  ; set stack pointer
+
+    ; Call Main
+    call __managed__Main
+
+    ; Infinite loop
     hlt
-    jmp sthrow
+    jmp $
+
+section .bss
+resb 8192                 ; 8KB for stack
+stack_space:
