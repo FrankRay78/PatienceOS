@@ -11,11 +11,16 @@ A working set of things to achieve:
 3. Hardware interrupts and outputting keyboard keystrokes to the screen.
 4. Implement/port some useful routines from the C standard library ie. vfprintf [master](https://git.musl-libc.org/cgit/musl/tree/src/stdio/vfprintf.c) or [clone](https://github.com/BlankOn/musl/blob/master/src/stdio/printf.c)
 
+## Progress
+The obligatory screenshot, which (at the moment), is pretty underwhelming I admit:
+![QEMU Hello](https://github.com/FrankRay78/PatienceOS/assets/52075808/944c82c0-0f5b-4880-a0bb-ee36bb5628ee)
+
 ## Environment setup
 
-1. Install - .Net 7, Visual Studio 2022, Windows SDK (?), NASM, MSYS2 UCRT64 including qemu via pacman package manager
-2. ILC, the Native .Net AOT compiler, needs to be installed locally eg. `dotnet add package Microsoft.DotNet.ILCompiler --version 7.0.14`
-3. The path to ILC needs to be set as an environment variable called `ILCPATH` eg. `setx ILCPATH "C:\Users\frank\.nuget\packages\runtime.win-x64.microsoft.dotnet.ilcompiler\7.0.14\tools"` (no trailing slash)
+1. Install - .Net 7, Visual Studio 2022, ~~Windows SDK~~ (nb. not sure this is needed anymore, now that I removed references to kernel32.dll from zerosharp)
+2. Install - MSYS2 UCRT64 including qemu via pacman package manager
+3. ILC, the Native .Net AOT compiler, needs to be installed locally eg. `dotnet add package Microsoft.DotNet.ILCompiler --version 7.0.14`
+4. The path to ILC needs to be set as an environment variable called `ILCPATH` eg. `setx ILCPATH "C:\Users\frank\.nuget\packages\runtime.win-x64.microsoft.dotnet.ilcompiler\7.0.14\tools"` (no trailing slash)
 
 ## Build instructions
 
