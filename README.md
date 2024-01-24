@@ -9,7 +9,11 @@ A working set of things to achieve:
 1. Ability to replace the standard Linux init process with a custom C application, compiled to bare metal and executable. (DONE, 18 Nov 2023, see: [Boot the Linux 6.x kernel in QEMU and run a custom C application as the init process](https://gist.github.com/FrankRay78/426011c03a7fb4f890eb5b4a068720c8))
 2. Using an emulator, boot in 32-bit protected mode ~~using GRUB2~~ (nb. QEMU can boot directly into 32-bit protected mode, saving the faff of making an ISO image) and output 'hello world' by writing directly to the VGA video memory. (DONE, 4 Jan 2024, see: [Compiling a C# kernel to bare metal and booting in QEMU](https://frankray.net/blog/2024/01/compiling-a-csharp-kernel-to-bare-metal-and-booting-in-qemu/))
 3. Hardware interrupts and outputting keyboard keystrokes to the screen.
-4. Implement/port some useful routines from the C standard library ie. vfprintf [master](https://git.musl-libc.org/cgit/musl/tree/src/stdio/vfprintf.c) or [clone](https://github.com/BlankOn/musl/blob/master/src/stdio/printf.c)
+4. Loading an elf into memory and executing it. Loading multiple instances of the elf and executing them (what do they share, and how is that allocated, managed etc)
+5. Memory management, garbage collection. How this works underneath the covers is. stack and virtual page application.
+6. Implement/port some useful routines from the C standard library ie. vfprintf [master](https://git.musl-libc.org/cgit/musl/tree/src/stdio/vfprintf.c) or [clone](https://github.com/BlankOn/musl/blob/master/src/stdio/printf.c)
+7. Implement custom TCPIP stack, see: [Let's code a TCP/IP stack](https://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/), [Level-IP](https://github.com/saminiir/level-ip), [tapip](https://github.com/chobits/tapip)
+8. Ultimately, host a TFTP server, see: [Tftp.Net C# Library](https://github.com/Callisto82/tftp.net), [Booting Arch Linux from PXE](https://www.saminiir.com/boot-arch-linux-from-pxe/)
 
 ## Progress
 The obligatory screenshot, which (at the moment), is pretty underwhelming I admit:
