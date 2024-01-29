@@ -19,24 +19,26 @@ A working set of things to achieve:
 The obligatory screenshot, which (at the moment), is pretty underwhelming I admit:
 ![QEMU Hello](https://github.com/FrankRay78/PatienceOS/assets/52075808/944c82c0-0f5b-4880-a0bb-ee36bb5628ee)
 
-## Windows 10 Host
+## Playing with PatienceOS
+
+### Windows 10 Host
 I love Visual Studio and find it a far superior IDE compared to VS Code. Unfortunately, the lack of a Linux Visual Studio version means I'm tied to Windows, at least for now ([probably forever](https://developercommunity.visualstudio.com/t/Visual-Studio-for-Linux/360479)). This is my primary reason for using Windows as my development machine ('nix users, don't hate on me).
 
 ### Installation
-Perform the one-off installs, ideally in a virtual machine:
+Perform the following one-off installations, ideally in a virtual machine:
 
 1. Microsoft .Net 8, Visual Studio 2022
 2. MSYS2 MINGW64, see: [MSYS2-Installation](https://www.msys2.org/wiki/MSYS2-installation/)
-3. NASM, see: [NASM Downloads](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D)
-4. QEMU, see: [Download QEMU](https://www.qemu.org/download/#windows), nb. I used the latest Stefan Weil [64-bit Windows installer](https://qemu.weilnetz.de/w64/)
+3. NASM, the native Windows binaries, see: [NASM Downloads](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D)
+4. QEMU, the native Windows binaries, see: [Download QEMU](https://www.qemu.org/download/#windows), nb. I used the latest Stefan Weil [64-bit Windows installer](https://qemu.weilnetz.de/w64/)
 
 ### Configuration
 1. ILC, the Native .Net AOT compiler, needs to be installed locally eg. `dotnet add package Microsoft.DotNet.ILCompiler --version 7.0.14`
 2. The path to ILC needs to be set as an environment variable called `ILCPATH` eg. `setx ILCPATH "C:\Users\frank\.nuget\packages\runtime.win-x64.microsoft.dotnet.ilcompiler\7.0.14\tools"` (no trailing slash)
 
 ### Booting
-1. Open `x86 Native Tools Command Prompt for VS 2022`
-2. Include the correct tool paths in the console session, `src\setpath.cmd`
+1. Open `x64 Native Tools Command Prompt for VS 2022`
+2. Set the correct tool paths in the console session, `src\setpath.cmd`
 3. Compile, link and boot, `src\build.cmd`
 
 Patience OS, a baremetal C# kernel, should boot in QEMU.
