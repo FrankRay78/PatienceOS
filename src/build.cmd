@@ -15,31 +15,24 @@
 ::   the linker on your PATH.
 ::
 
-@if not exist %ILCPATH%\ilc.exe (
-  echo The ILCPATH environment variable not set.
-  exit /B
-)
-@where csc >nul 2>&1
-@if ERRORLEVEL 1 (
-  echo CSC not on the PATH.
-  exit /B
-)
-
 @del kernel.ilexe >nul 2>&1
 @del kernel.obj >nul 2>&1
 @del kernel.exe >nul 2>&1
 @del kernel.map >nul 2>&1
 @del kernel.pdb >nul 2>&1
+@del kernel.ilk >nul 2>&1
 @del kernel.bin >nul 2>&1
 @del kernel.elf >nul 2>&1
-@del loader.o >nul 2>&1
+@del loader.obj >nul 2>&1
 
 @if "%1" == "clean" exit /B
 
 csc /define:WINDOWS /debug:embedded /noconfig /nostdlib /runtimemetadataversion:v4.0.30319 kernel.cs /out:kernel.ilexe /langversion:latest /unsafe || goto Error
-%ILCPATH%\ilc --targetos windows --targetarch x86 kernel.ilexe -g -o kernel.obj --systemmodule kernel --map kernel.map -O || goto Error
-C:\Users\frank\AppData\Local\bin\NASM\NASM -f elf32 -o loader.o loader.asm || goto Error
-::link /debug /subsystem:console kernel.obj /entry:__managed__Main kernel32.lib /incremental:no || goto Error
+ilc --targetos windows --targetarch x86 kernel.ilexe -g -o kernel.obj --systemmodule kernel --map kernel.map -O || goto Error
+nasm -f win32 -o loader.obj loader.asm || goto Error
+link /debug /subsystem:console /machine:x86 /nodefaultlib /base:0x00200000 /entry:kernel_Program__Main /out:kernel.bin loader.obj kernel.obj
+objcopy -O elf32-i386 kernel.bin kernel.elf
+qemu-system-i386 -kernel kernel.elf
 
 @goto :EOF
 
