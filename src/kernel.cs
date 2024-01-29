@@ -1,10 +1,8 @@
-/*using System;
+//The contents of this file, at least down to 'unsafe class Program'
+//was taken verbatim from the excellent ZeroSharp project, 
+//namely here: https://github.com/MichalStrehovsky/zerosharp/blob/master/no-runtime/zerosharp.cs
 
-Console.WriteLine("Hello world!");*/
-
-
-
-/* FROM OTHER KERNEL.CS */
+//TODO: split out the ZeroSharp logic into it's own cs file, so the kernel logic is separate.
 
 
 using System;
