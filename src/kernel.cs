@@ -1,8 +1,11 @@
-//The contents of this file, at least down to 'unsafe class Program'
-//was taken verbatim from the excellent ZeroSharp project, 
-//namely from here: https://github.com/MichalStrehovsky/zerosharp/blob/master/no-runtime/zerosharp.cs
+/*using System;
 
-//TODO: split out the ZeroSharp logic into it's own cs file, so the kernel logic is separate.
+Console.WriteLine("Hello world!");*/
+
+
+
+/* FROM OTHER KERNEL.CS */
+
 
 using System;
 using System.Runtime;
@@ -123,28 +126,28 @@ namespace Internal.Runtime.CompilerHelpers
 }
 #endregion
 
+
+
 unsafe class Program
 {
-        static int pos = 0;
- 
-        unsafe static void Main()
-        {
-            // Clear the screen
-            for(int i = 0; i < 80 * 25 * 2; i++)
-                *(byte *)(0xb8000 + i) = 0;
- 
-            // Say hi
-            Print('H');
-            Print('e');
-            Print('l');
-            Print('l');
-            Print('o');
+    static int pos = 0;
+
+    static int Main()
+    {
+        // Clear the screen
+        for(int i = 0; i < 80 * 25 * 2; i++)
+            *(byte *)(0xb8000 + i) = 0;
+
+        Print('H');
+        Print('i');
+
+        return 0;
     }
- 
-        unsafe static void Print(char c)
-        {
-            *(byte *)(0xb8000 + pos) = (byte)c;
-            *(byte *)(0xb8000 + pos + 1) = 0x0f;
-            pos += 2;
-        }
+
+    unsafe static void Print(char c)
+    {
+        *(byte *)(0xb8000 + pos) = (byte)c;
+        *(byte *)(0xb8000 + pos + 1) = 0x0f;
+        pos += 2;
+    }
 }
