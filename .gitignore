@@ -1,11 +1,6 @@
 
 #Frank's additions
-*.exe
-*.ilexe
-*.map
-*.o
-*.bin
-*.elf
+bin/
 
 
 ## Ignore Visual Studio temporary files, build results, and
