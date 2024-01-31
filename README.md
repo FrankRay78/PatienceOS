@@ -29,11 +29,12 @@ Perform the following one-off installs, ideally in a virtual machine:
 
 1. Microsoft .Net 8, Visual Studio 2022
 2. MSYS2 MINGW64, see: [MSYS2-Installation](https://www.msys2.org/wiki/MSYS2-installation/)
-4. NASM, the native Windows binaries, see: [NASM Downloads](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D)
-5. QEMU, the native Windows binaries, see: [Download QEMU](https://www.qemu.org/download/#windows), nb. I used the latest Stefan Weil [64-bit Windows installer](https://qemu.weilnetz.de/w64/)
+3. QEMU, the native Windows binaries, see: [Download QEMU](https://www.qemu.org/download/#windows), nb. I used the latest Stefan Weil [64-bit Windows installer](https://qemu.weilnetz.de/w64/)
 
 ### Configuration
-1. ILC, the Native .Net AOT compiler, needs to be installed locally. It's a nuget package and will be present if you have configured and built at least one C# .Net project that emits native AOT code. I'm using version 8.0.1 of the IL compiler and so expect to see it installed in the nuget cache for my user, `info`, here: `C:\Users\info\.nuget\packages\runtime.win-x64.microsoft.dotnet.ilcompiler\8.0.1\tools`. If you don't see something similar, then perform the following steps in a temporary directory to create a temporary application, simply for the purpose of installing ILC locally:
+
+#### ILC, the Native .Net AOT compiler
+ILC needs to be installed locally. It's a nuget package and will be present if you have configured and built at least one C# .Net project that emits native AOT code. I'm using version 8.0.1 of the IL compiler and so expect to see it installed in the nuget cache for my user, `info`, here: `C:\Users\info\.nuget\packages\runtime.win-x64.microsoft.dotnet.ilcompiler\8.0.1\tools`. If you don't see something similar, then perform the following steps in a temporary directory to create a temporary application, simply for the purpose of installing ILC locally:
 
 ```
 dotnet new console -n MyConsoleApp
@@ -48,8 +49,15 @@ dotnet build
 ```
 `ilc.exe` should now be installed here: `C:\Users\info\.nuget\packages\runtime.win-x64.microsoft.dotnet.ilcompiler\8.0.1\tools`
 
-2. Open the MSYS2 MINGW64 console, perform a full package upgrade: `pacman -Syuu`, install binutils: `pacman -S mingw-w64-x86_64-binutils` (required to get a Windows compiled `objcopy`)
-3. Several tools are required in the build and link process. Update `src\setpath.cmd` to point to the correct install locations on your machine. The existing entries in the file will give you a good idea of where to find them, if you have followed the instructions above and accepted default install locations.
+#### MSYS2 MINGW64
+Open the MSYS2 MINGW64 console and perform the following actions:
+
+1. A full package upgrade: `pacman -Syuu`, 
+2. Install binutils: `pacman -S mingw-w64-x86_64-binutils` (required to get a Windows compiled `objcopy`)
+3. Install NASM: `pacman -S mingw-w64-x86_64-nasm`
+
+#### Build tool paths
+Several tools are required in the build and link process. Update `src\setpath.cmd` to point to the correct install locations on your machine. The existing entries in the file will give you a good idea of where to find them, if you have followed the instructions above and accepted default install locations.
 
 ### Booting
 1. Open `x64 Native Tools Command Prompt for VS 2022`
