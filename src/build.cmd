@@ -13,7 +13,7 @@ rmdir /S /Q ..\bin >nul 2>&1
 mkdir ..\bin
 cd ..\bin
 
-csc /define:WINDOWS /debug:embedded /noconfig /nostdlib /runtimemetadataversion:v4.0.30319 ../src/kernel.cs /out:kernel.ilexe /langversion:latest /unsafe || goto Error
+csc /define:WINDOWS /debug:embedded /noconfig /nostdlib /runtimemetadataversion:v4.0.30319 ../src/kernel.cs ../src/zerosharp.cs /out:kernel.ilexe /langversion:latest /unsafe || goto Error
 ilc --targetos windows --targetarch x86 kernel.ilexe -g -o kernel.obj --systemmodule kernel --map kernel.map -O || goto Error
 nasm -f win32 -o loader.obj ../src/loader.asm || goto Error
 
