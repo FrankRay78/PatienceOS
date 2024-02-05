@@ -1,12 +1,9 @@
-//The contents of this file was taken from the excellent ZeroSharp project
+//The contents of this file was originally sourced from the excellent ZeroSharp project,
 //see: https://github.com/MichalStrehovsky/zerosharp/blob/master/no-runtime/zerosharp.cs
-
 
 using System;
 using System.Runtime;
-using System.Runtime.InteropServices;
 
-#region A couple very basic things
 namespace System
 {
     public class Object
@@ -35,13 +32,14 @@ namespace System
     public struct Single { }
     public struct Double { }
 
+    public struct Nullable<T> where T : struct { }
+
     public abstract class ValueType { }
     public abstract class Enum : ValueType { }
 
-    public struct Nullable<T> where T : struct { }
-    
     public sealed class String { public readonly int Length; }
     public abstract class Array { }
+    public abstract class Array<T> : Array { }
     public abstract class Delegate { }
     public abstract class MulticastDelegate : Delegate { }
 
@@ -50,7 +48,6 @@ namespace System
     public struct RuntimeFieldHandle { }
 
     public class Attribute { }
-
     public enum AttributeTargets { }
 
     public sealed class AttributeUsageAttribute : Attribute
@@ -59,41 +56,22 @@ namespace System
         public bool AllowMultiple { get; set; }
         public bool Inherited { get; set; }
     }
+}
 
-    public class AppContext
+namespace Runtime.CompilerServices
+{
+    public class RuntimeHelpers
     {
-        public static void SetData(string s, object o) { }
-    }
-
-    namespace Runtime.CompilerServices
-    {
-        public class RuntimeHelpers
-        {
-            public static unsafe int OffsetToStringData => sizeof(IntPtr) + sizeof(int);
-        }
+        public static unsafe int OffsetToStringData => sizeof(IntPtr) + sizeof(int);
     }
 }
-namespace System.Runtime.InteropServices
-{
-    public sealed class DllImportAttribute : Attribute
-    {
-        public DllImportAttribute(string dllName) { }
-    }
-}
-#endregion
 
-#region Things needed by ILC
-namespace System
+namespace System.Runtime
 {
-    namespace Runtime
+    internal sealed class RuntimeExportAttribute : Attribute
     {
-        internal sealed class RuntimeExportAttribute : Attribute
-        {
-            public RuntimeExportAttribute(string entry) { }
-        }
+        public RuntimeExportAttribute(string entry) { }
     }
-
-    class Array<T> : Array { }
 }
 
 namespace Internal.Runtime.CompilerHelpers
@@ -114,9 +92,7 @@ namespace Internal.Runtime.CompilerHelpers
         static void RhpPInvoke(IntPtr frame) { }
         [RuntimeExport("RhpPInvokeReturn")]
         static void RhpPInvokeReturn(IntPtr frame) { }
-
         [RuntimeExport("RhpFallbackFailFast")]
         static void RhpFallbackFailFast() { while (true) ; }
     }
 }
-#endregion
