@@ -60,6 +60,14 @@ Patience OS, a baremetal C# kernel, should boot in QEMU.
 ## Notes
 Targeting machine-specific architectures can be done at the compiler call (eg. `csc /platform:x64`) and/or the linker call (eg. `link /machine:x64`)
 
+#### IL to Native compilation
+Inspiration has been drawn from the following precursors to the AOT compiler we see in .Net 7/8:
+* [bflat](https://github.com/bflattened/bflat) - C# as you know it but with Go-inspired tooling (small, self-contained, and native executables).
+* [zerosharp](https://github.com/MichalStrehovsky/zerosharp) - Demo of the potential of C# for systems programming with the .NET native ahead-of-time compilation technology.
+* [WDK.NET](https://github.com/ZeroLP/WDK.Net) - Windows Kernel Driver Development in C# with Windows Driver Kit (WDK).
+* [IL2CPU](https://github.com/CosmosOS/IL2CPU) - IL2CPU is a compiler for .NET IL code to compile to assembly language for direct booting.
+* [FlingOS](https://github.com/FlingOS/FlingOS) - An educational operating system written in C#. A great stepping stone from high to low-level development.
+
 # Experiments
 A working backlog of Frank's personal learning objectives for 2024 (and beyond?):
  
