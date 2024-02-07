@@ -58,7 +58,33 @@ Several tools are required in the build and link process. Update `src\setpath.cm
 Patience OS, a baremetal C# kernel, should boot in QEMU.
 
 ## Notes
-Targeting machine-specific architectures can be done at the compiler call (eg. `csc /platform:x64`) and/or the linker call (eg. `link /machine:x64`)
+#### Commentary on the build process
+Relying on Visual Studio specific, MSBuild or csproj files to build the kernel has been avoided in favour of directly calling the individual build tools. I want fine-grained control over the compile and link process, MSBuild feels like a poorly documented 'black box' that changes every .Net release in subtle ways that aren't clear, and I don't want to invest a huge amount of time developing a C# kernel only to find I can't build it in some future .Net release. 
+
+I would have sincerely loved to use [bflat](https://github.com/bflattened/bflat) as my IL to native compiler, but even that didn't seem to allow intermediate object file output for class libraries, and I didn't want to raise an issue requesting the CLI options expose more of the underlying compiler switches. And so I've stuck to the approach demo'd in [zerosharp](https://github.com/MichalStrehovsky/zerosharp), namely a Windows command/batch file. 
+
+Of particular note are the following lines in `src\build.cmd`:
+
+**C# IL Compiler**
+
+`csc /debug:embedded /noconfig /nostdlib /runtimemetadataversion:v4.0.30319 ../src/kernel.cs ../src/zerosharp.cs /out:kernel.ilexe /langversion:latest /unsafe`
+
+```text
+/noconfig: Don't reference the standard set of assemblies and configuration files.
+/nostdlib: Don't reference the standard library assemblies.
+/unsafe: Allow unsafe code blocks in C#, enabling pointers and other low-level constructs that aren't type-safe.
+```
+
+**C# AOT Compiler**
+
+`ilc --targetos windows --targetarch x86 kernel.ilexe -g -o kernel.obj --systemmodule kernel --map kernel.map -O`
+
+```text
+--targetos windows: The code is intended to run on the Windows operating system.
+--targetarch x86: The code is being compiled for the x86 architecture, typically used in 32-bit Windows systems.
+```
+
+Targeting machine-specific architectures can be done at the compiler call (eg. `csc /platform:x64` or `ilc --targetarch x86`) and/or the linker call (eg. `link /machine:x64`)
 
 #### IL to Native compilation
 Inspiration has been drawn from the following precursors to the AOT compiler we see in .Net 7/8:
