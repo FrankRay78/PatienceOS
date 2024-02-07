@@ -7,8 +7,8 @@ Built using a combination of Microsoft's C# IL and native AOT compilers, and the
 PatienceOS was chosen to remind Frank this is a 12-month initial project (at least), as part of his [2024 professional development](https://frankray.net/blog/2023/11/writing-an-os-in-csharp-dotnet/) goals. The dopamine hit from quickly pushing out PR's, like he regularly enjoys from contributing to other OSS repos (eg. [spectre.console](https://github.com/spectreconsole/spectre.console)), simply won't be possible with OS development. Hence the need for patience, and perseverance.
 
 #### References
-I will lean heavily on the work of Philipp Oppermann ([Writing an OS in Rust](https://os.phil-opp.com/)), Guanzhou Hu ([Hux kernel](https://github.com/josehu07/hux-kernel/wiki)) and Carlos Fenollosa
-([os-tutorial](https://github.com/cfenollosa/os-tutorial)).
+I will lean heavily on the tutorials written by Philipp Oppermann ([Writing an OS in Rust](https://os.phil-opp.com/)), Guanzhou Hu ([Hux kernel](https://github.com/josehu07/hux-kernel/wiki)) and Carlos Fenollosa
+([os-tutorial](https://github.com/cfenollosa/os-tutorial)) and also the C# educational operating system written by Ed Nutting ([FlingOS](https://github.com/FlingOS/FlingOS)).
 
 ## Progress
 The obligatory screenshot, which (at the moment), is pretty underwhelming I admit:
