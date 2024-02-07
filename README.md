@@ -61,9 +61,9 @@ Patience OS, a baremetal C# kernel, should boot in QEMU.
 #### Commentary on the build process
 Relying on Visual Studio specific, MSBuild or csproj files to build the kernel has been avoided in favour of directly calling the individual build tools. I want fine-grained control over the compile and link process, MSBuild feels like a poorly documented 'black box' that changes every .Net release in subtle ways that aren't clear, and I don't want to invest a huge amount of time developing a C# kernel only to find I can't build it in some future .Net release. 
 
-I would have sincerely loved to use [bflat](https://github.com/bflattened/bflat) as my IL to native compiler, but even that didn't seem to allow intermediate object file output for class libraries, and I didn't want to raise an issue requesting the CLI options expose more of the underlying compiler switches. And so I've stuck to the approach demo'd in [zerosharp](https://github.com/MichalStrehovsky/zerosharp), namely a Windows command/batch file. 
+I would have sincerely loved to use [bflat](https://github.com/bflattened/bflat) as my IL to native compiler, but even that didn't seem to allow intermediate object file output for class libraries, and I didn't want to raise an issue requesting the CLI options expose more of the underlying compiler switches. And so I've stuck to the approach demo'd in [zerosharp](https://github.com/MichalStrehovsky/zerosharp), namely a Windows command/batch file ([build.cmd](https://github.com/MichalStrehovsky/zerosharp/blob/master/no-runtime/build.cmd)). 
 
-Of particular note are the following lines in `src\build.cmd`:
+The following lines in the PatienceOS `src\build.cmd` are of particular note:
 
 **C# IL Compiler**
 
