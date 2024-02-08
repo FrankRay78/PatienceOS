@@ -37,7 +37,37 @@ namespace System
     public abstract class ValueType { }
     public abstract class Enum : ValueType { }
 
-    public sealed class String { public readonly int Length; }
+    public sealed class String 
+    { 
+        public readonly int Length;
+
+        //public char[] ToCharArray()
+        //{
+        //    int length = this.Length;
+        //    char[] charArray = new char[length]; // Allocate memory for the char array
+
+        //    for (int i = 0; i < length; i++)
+        //    {
+        //        charArray[i] = this[i]; // Copy each character into the char array
+        //    }
+
+        //    return charArray; // Return the char array
+        //}
+
+        //public char this[int index]
+        //{
+        //    get
+        //    {
+        //        if (index < 0 || index >= this.Length)
+        //        {
+        //            //TODO:
+        //            //throw new IndexOutOfRangeException("Index is out of range.");
+        //        }
+        //        return this[index];
+        //    }
+        //}
+    }
+
     public abstract class Array { }
     public abstract class Array<T> : Array { }
     public abstract class Delegate { }
@@ -58,7 +88,7 @@ namespace System
     }
 }
 
-namespace Runtime.CompilerServices
+namespace System.Runtime.CompilerServices
 {
     public class RuntimeHelpers
     {
