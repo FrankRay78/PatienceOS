@@ -37,7 +37,11 @@ namespace System
     public abstract class ValueType { }
     public abstract class Enum : ValueType { }
 
-    public sealed class String { public readonly int Length; }
+    public sealed class String 
+    { 
+        public readonly int Length;
+    }
+
     public abstract class Array { }
     public abstract class Array<T> : Array { }
     public abstract class Delegate { }
@@ -58,7 +62,7 @@ namespace System
     }
 }
 
-namespace Runtime.CompilerServices
+namespace System.Runtime.CompilerServices
 {
     public class RuntimeHelpers
     {
