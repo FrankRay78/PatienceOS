@@ -110,3 +110,9 @@ A working backlog of Frank's personal learning objectives for 2024 (and beyond?)
 - [ ] Implement custom TCPIP stack, see: [Let's code a TCP/IP stack](https://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/), [Level-IP](https://github.com/saminiir/level-ip), [tapip](https://github.com/chobits/tapip)
 - [ ] Ultimately, host a TFTP server, see: [Tftp.Net C# Library](https://github.com/Callisto82/tftp.net), [Booting Arch Linux from PXE](https://www.saminiir.com/boot-arch-linux-from-pxe/)
 
+# Blog posts
+Chronological order:
+
+1. 20231115 [Writing an OS in C#](https://frankray.net/blog/2023/11/writing-an-os-in-csharp-dotnet/)
+2. 20240104 [Compiling a C# kernel to bare metal and booting in QEMU](https://frankray.net/blog/2024/01/compiling-a-csharp-kernel-to-bare-metal-and-booting-in-qemu/)
+3. 20240209 [PatienceOS isn’t living up to its name](https://frankray.net/blog/2024/02/patienceos-isnt-living-up-to-its-name/)
