@@ -60,7 +60,9 @@ Several tools are required in the build and link process. Update `src\setpath.cm
 
 Patience OS, a baremetal C# kernel, should boot in QEMU.
 
-## Commentary on the build process
+## Build toolchain
+
+#### Commentary on the build process
 Relying on Visual Studio specific, MSBuild or csproj files to build the kernel has been avoided in favour of directly calling the individual build tools. I want fine-grained control over the compile and link process, MSBuild feels like a poorly documented 'black box' that changes every .Net release in subtle ways that aren't clear, and I don't want to invest a huge amount of time developing a C# kernel only to find I can't build it in some future .Net release. 
 
 I would have sincerely loved to use [bflat](https://github.com/bflattened/bflat) as my IL to native compiler, but even that didn't seem to allow intermediate object file output for class libraries, and I didn't want to raise an issue requesting the CLI options expose more of the underlying compiler switches. And so I've stuck to the approach demo'd in [zerosharp](https://github.com/MichalStrehovsky/zerosharp), namely a Windows command/batch file ([build.cmd](https://github.com/MichalStrehovsky/zerosharp/blob/master/no-runtime/build.cmd)). 
@@ -88,6 +90,11 @@ The following lines in the PatienceOS `src\build.cmd` are of particular note:
 
 
 Targeting machine-specific architectures can be done at the compiler call (eg. `csc /platform:x64` or `ilc --targetarch x86`) and/or the linker call (eg. `link /machine:x64`)
+
+#### Commentary on the build environment
+Believe me, when I say, that I really did try and have a single environment for the end-to-end build process. It was much harder than I thought and unfortunately I've not managed to do it yet, however I have managed to get everything to run inside a single `x64 Native Tools Command Prompt for VS 2022` (no small feat). Tools called, in order, are `csc` and `ilc` .Net compilers; `nasm`, `ld` and `objcopy` within MSYS2/MINGW; and then `qemu-system-i386` installed natively on the host Windows 10 machine. 
+
+It sounds mad, but Philipp Oppermann had the same experience when developing his Rust kernel, relying on various GNU tools that also made it difficult to build on macOS and Windows (nb. a major hurdle seems to be getting a native Windows build of GRUB and grub-mkrescue, see [here](https://github.com/intermezzOS/book/issues/53) and [here](https://forum.osdev.org/viewtopic.php?f=1&t=55959)). Then Philipp decided to re-write the entire toolchain in Rust for the second edition of his blog, see [Writing an OS in pure Rust](https://os.phil-opp.com/news/pure-rust/), thus making it possible to build the OS natively on Windows, macOS, and Linux **without any non-Rust dependendencies**.
 
 ## References
 #### IL to Native compilation
