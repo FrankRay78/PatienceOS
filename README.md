@@ -89,6 +89,7 @@ The following lines in the PatienceOS `src\build.cmd` are of particular note:
 
 Targeting machine-specific architectures can be done at the compiler call (eg. `csc /platform:x64` or `ilc --targetarch x86`) and/or the linker call (eg. `link /machine:x64`)
 
+## References
 #### IL to Native compilation
 Inspiration has been drawn from the following precursors to the AOT compiler we see in .Net 7/8:
 * [bflat](https://github.com/bflattened/bflat) - C# as you know it but with Go-inspired tooling (small, self-contained, and native executables).
@@ -97,20 +98,23 @@ Inspiration has been drawn from the following precursors to the AOT compiler we 
 * [IL2CPU](https://github.com/CosmosOS/IL2CPU) - IL2CPU is a compiler for .NET IL code to compile to assembly language for direct booting.
 * [FlingOS](https://github.com/FlingOS/FlingOS) - An educational operating system written in C#. A great stepping stone from high to low-level development.
 
-# Experiments
+## Experiments
 A working backlog of Frank's personal learning objectives for 2024 (and beyond?):
  
 - [x] Ability to replace the standard Linux init process with a custom C application, compiled to bare metal and executable. (DONE, 18 Nov 2023, see: [Boot the Linux 6.x kernel in QEMU and run a custom C application as the init process](https://gist.github.com/FrankRay78/426011c03a7fb4f890eb5b4a068720c8))
 - [X] Using an emulator, boot in 32-bit protected mode ~~using GRUB2~~ (nb. QEMU can boot directly into 32-bit protected mode, saving the faff of making an ISO image) and output 'hello world' by writing directly to the VGA video memory. (DONE, 4 Jan 2024, see: [Compiling a C# kernel to bare metal and booting in QEMU](https://frankray.net/blog/2024/01/compiling-a-csharp-kernel-to-bare-metal-and-booting-in-qemu/))
+- [X] Basic terminal output (DONE, 10 Feb 2024, Displays a multiline splash screen/logo on boot)
+- [ ] Advanced terminal output, including terminal sizes other than 80x25, buffered output and scrolling
 - [ ] Testable kernel components, including unit test framework and tests coverage (ideally leveraging an already established C# test framework eg. [NUnit](https://nunit.org/))
 - [ ] Hardware interrupts and outputting keyboard keystrokes to the screen.
-- [ ] Memory management, garbage collection. Learn how this works underneath the covers for an AOT compiled C# kernel ie. stack, heap and virtual page application.
+- [ ] Basic memory management ie. stack and heap allocation. Learn how this works underneath the covers for an AOT compiled C# kernel.
+- [ ] Advanced memory management, including allocation, virtual page management and garbage collection.
 - [ ] Loading an elf into memory and executing it. Loading multiple instances of the elf and executing them (what do they share, and how is that allocated, managed etc)
 - [ ] Implement/port some useful routines from the C standard library ie. vfprintf ([master](https://git.musl-libc.org/cgit/musl/tree/src/stdio/vfprintf.c), [clone](https://github.com/BlankOn/musl/blob/master/src/stdio/printf.c))
 - [ ] Implement custom TCPIP stack, see: [Let's code a TCP/IP stack](https://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/), [Level-IP](https://github.com/saminiir/level-ip), [tapip](https://github.com/chobits/tapip)
 - [ ] Ultimately, host a TFTP server, see: [Tftp.Net C# Library](https://github.com/Callisto82/tftp.net), [Booting Arch Linux from PXE](https://www.saminiir.com/boot-arch-linux-from-pxe/)
 
-# Blog posts
+## Blog posts
 Chronological order:
 
 1. 20231115 [Writing an OS in C#](https://frankray.net/blog/2023/11/writing-an-os-in-csharp-dotnet/)
