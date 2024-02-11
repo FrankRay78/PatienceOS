@@ -120,6 +120,7 @@ A working backlog of Frank's personal learning objectives for 2024 (and beyond?)
 - [x] Ability to replace the standard Linux init process with a custom C application, compiled to bare metal and executable. (DONE, 18 Nov 2023, see: [Boot the Linux 6.x kernel in QEMU and run a custom C application as the init process](https://gist.github.com/FrankRay78/426011c03a7fb4f890eb5b4a068720c8))
 - [X] Using an emulator, boot in 32-bit protected mode ~~using GRUB2~~ (nb. QEMU can boot directly into 32-bit protected mode, saving the faff of making an ISO image) and output 'hello world' by writing directly to the VGA video memory. (DONE, 4 Jan 2024, see: [Compiling a C# kernel to bare metal and booting in QEMU](https://frankray.net/blog/2024/01/compiling-a-csharp-kernel-to-bare-metal-and-booting-in-qemu/))
 - [X] Basic terminal output (DONE, 10 Feb 2024, Displays a multiline splash screen/logo on boot, commit [c2850ae094a3db14cb4b74e465afa26ab3f4a49c](https://github.com/FrankRay78/PatienceOS/commit/c2850ae094a3db14cb4b74e465afa26ab3f4a49c))
+- [ ] See if I can get the Microsoft linker, link, to output exactly the same file as the GNU linker, ld
 - [ ] Advanced terminal output, including terminal sizes other than 80x25, buffered output and scrolling
 - [ ] Testable kernel components, including unit test framework and tests coverage (ideally leveraging an already established C# test framework eg. [NUnit](https://nunit.org/))
 - [ ] Hardware interrupts and outputting keyboard keystrokes to the screen.
