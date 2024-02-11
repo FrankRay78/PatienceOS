@@ -96,6 +96,13 @@ Believe me, when I say, that I really did try and have a single environment for 
 
 It sounds mad, but Philipp Oppermann had the same experience when developing his Rust kernel, relying on various GNU tools that also made it difficult to build on macOS and Windows (nb. a major hurdle seems to be getting a native Windows build of GRUB and grub-mkrescue, see [here](https://github.com/intermezzOS/book/issues/53) and [here](https://forum.osdev.org/viewtopic.php?f=1&t=55959)). Then Philipp decided to re-write the entire toolchain in Rust for the second edition of his blog, see [Writing an OS in pure Rust](https://os.phil-opp.com/news/pure-rust/), thus making it possible to build the OS natively on Windows, macOS, and Linux **without any non-Rust dependendencies**.
 
+Here are the various build environments I tried, and the reasons why they were discarded:
+
+Environment | Findings
+--- | --- 
+`Windows only` | kernel.bin linker output is 'PE32 executable (console) Intel 80386, for MS Windows', which is not supported by QEMU direct kernel boot. Hence needing objcopy from MSYS2/MINGW64 to convert it to the elf32-i386 format.
+`WSL only` | ilc, the .Net AOT compiler, doesn't seem to support 32-bit x86 compilation output on Linux, which I really want. OSDev Wiki agrees, saying *"If this is your first operating system project, you should do a 32-bit kernel first."*, see: [Bare Bones](https://wiki.osdev.org/Bare_Bones).
+
 ## References
 #### IL to Native compilation
 Inspiration has been drawn from the following precursors to the AOT compiler we see in .Net 7/8:
