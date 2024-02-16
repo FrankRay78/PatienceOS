@@ -1,4 +1,8 @@
 
 # Frank's 'private' files
 
-Not actually private, but not well documented, local config, scratch and temp work etc.
+A general store of some local files.
+
+Includes local config, scratch and temporary work etc. 
+
+Beware, these aren't documented nor intended for general consumption.
