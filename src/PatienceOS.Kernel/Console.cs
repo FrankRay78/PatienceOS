@@ -1,5 +1,31 @@
 ﻿namespace PatienceOS.Kernel
 {
+    //unsafe public struct FrameBuffer
+    //{
+    //    private const int VideoBaseAddress = 0xb8000;
+
+    //    public FrameBuffer(int baseAddress, int size)
+    //    {
+    //    }
+
+    //    public void Write(int position, byte value)
+    //    {
+    //        *(byte*)(address) = value;
+    //    }
+    //}
+
+    unsafe public struct FrameBuffer
+    {
+        public FrameBuffer() 
+        {
+        }
+
+        public void Write(int address, byte value)
+        {
+            *(byte*)(address) = value;
+        }
+    }
+
     /// <summary>
     /// Writes directly to the video memory
     /// </summary>
@@ -16,6 +42,7 @@
         private const int VideoBaseAddress = 0xb8000;
 
         private int pos = 0;
+        private FrameBuffer frameBuffer = new FrameBuffer();
 
         public Console()
         {
@@ -24,25 +51,25 @@
         /// <summary>
         /// Clear the screen
         /// </summary>
-        unsafe public void Clear()
+        public void Clear()
         {
             for (int i = 0; i < Width * Height * 2; i++)
             {
-                *(byte*)(VideoBaseAddress + i) = 0;
+                frameBuffer.Write(VideoBaseAddress + i, 0);
             }
         }
 
         /// <summary>
         /// Print a string to the current cursor position
         /// </summary>
-        unsafe public void Print(string s)
+        public void Print(string s)
         {
             fixed (char* ps = s)
             {
                 for (int i = 0; i < s.Length; i++)
                 {
-                    *(byte*)(VideoBaseAddress + pos) = (byte)ps[i];
-                    *(byte*)(VideoBaseAddress + pos + 1) = 0x0f;
+                    frameBuffer.Write(VideoBaseAddress + pos, (byte)ps[i]);
+                    frameBuffer.Write(VideoBaseAddress + pos + 1, 0x0F);
 
                     pos += 2;
                 }
