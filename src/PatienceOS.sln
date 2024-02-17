@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatienceOS.Kernel.Tests", "PatienceOS.Kernel.Tests\PatienceOS.Kernel.Tests.csproj", "{78EE8179-B20B-44F1-B2BD-62595BC7578F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatienceOS.Kernel", "C:\Users\info\Documents\Repos\PatienceOS\src\PatienceOS.Kernel\PatienceOS.Kernel.csproj", "{0348847C-ACAF-4F29-AB90-122DD663648A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatienceOS.Kernel", "PatienceOS.Kernel\PatienceOS.Kernel.csproj", "{21DE2FFD-E6A4-4E28-934C-34F19AB03B4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{78EE8179-B20B-44F1-B2BD-62595BC7578F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78EE8179-B20B-44F1-B2BD-62595BC7578F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78EE8179-B20B-44F1-B2BD-62595BC7578F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0348847C-ACAF-4F29-AB90-122DD663648A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0348847C-ACAF-4F29-AB90-122DD663648A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0348847C-ACAF-4F29-AB90-122DD663648A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0348847C-ACAF-4F29-AB90-122DD663648A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21DE2FFD-E6A4-4E28-934C-34F19AB03B4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21DE2FFD-E6A4-4E28-934C-34F19AB03B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21DE2FFD-E6A4-4E28-934C-34F19AB03B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21DE2FFD-E6A4-4E28-934C-34F19AB03B4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

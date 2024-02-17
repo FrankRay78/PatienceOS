@@ -7,7 +7,7 @@
     /// Assumes VGA text mode 7 (80 x 25)
     /// ref: https://en.wikipedia.org/wiki/VGA_text_mode
     /// </remarks>
-    unsafe public class Console
+    unsafe public struct Console
     {
         //https://www.kraxel.org/blog/2018/10/qemu-vga-emulation-and-bochs-display/
         private const int Width = 80;

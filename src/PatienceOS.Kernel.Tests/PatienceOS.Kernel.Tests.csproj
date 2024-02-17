@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="C:\Users\info\Documents\Repos\PatienceOS\src\PatienceOS.Kernel\PatienceOS.Kernel.csproj" />
+    <ProjectReference Include="..\PatienceOS.Kernel\PatienceOS.Kernel.csproj" />
   </ItemGroup>
 
 </Project>
