@@ -1,6 +1,6 @@
 using PatienceOS.Kernel;
 
-unsafe class Program
+class Program
 {
     static int Main()
     {
