@@ -1,51 +1,22 @@
 ﻿namespace PatienceOS.Kernel
 {
-    //unsafe public struct FrameBuffer
-    //{
-    //    private const int VideoBaseAddress = 0xb8000;
-
-    //    public FrameBuffer(int baseAddress, int size)
-    //    {
-    //    }
-
-    //    public void Write(int position, byte value)
-    //    {
-    //        *(byte*)(address) = value;
-    //    }
-    //}
-
-    unsafe public struct FrameBuffer
-    {
-        public FrameBuffer() 
-        {
-        }
-
-        public void Write(int address, byte value)
-        {
-            *(byte*)(address) = value;
-        }
-    }
-
     /// <summary>
-    /// Writes directly to the video memory
+    /// A virtual terminal for the kernel to interact with the user through
     /// </summary>
-    /// <remarks>
-    /// Assumes VGA text mode 7 (80 x 25)
-    /// ref: https://en.wikipedia.org/wiki/VGA_text_mode
-    /// </remarks>
     unsafe public struct Console
     {
-        //https://www.kraxel.org/blog/2018/10/qemu-vga-emulation-and-bochs-display/
-        private const int Width = 80;
-        private const int Height = 25;
+        private int width;
+        private int height;
 
-        private const int VideoBaseAddress = 0xb8000;
+        private FrameBuffer frameBuffer;
 
         private int pos = 0;
-        private FrameBuffer frameBuffer = new FrameBuffer();
 
-        public Console()
+        public Console(int width, int height, FrameBuffer frameBuffer)
         {
+            this.width = width;
+            this.height = height;
+            this.frameBuffer = frameBuffer;
         }
 
         /// <summary>
@@ -53,9 +24,9 @@
         /// </summary>
         public void Clear()
         {
-            for (int i = 0; i < Width * Height * 2; i++)
+            for (int i = 0; i < width * height * 2; i++)
             {
-                frameBuffer.Write(VideoBaseAddress + i, 0);
+                frameBuffer.Write(i, 0);
             }
         }
 
@@ -68,8 +39,8 @@
             {
                 for (int i = 0; i < s.Length; i++)
                 {
-                    frameBuffer.Write(VideoBaseAddress + pos, (byte)ps[i]);
-                    frameBuffer.Write(VideoBaseAddress + pos + 1, 0x0F);
+                    frameBuffer.Write(pos, (byte)ps[i]);
+                    frameBuffer.Write(pos + 1, 0x0F);
 
                     pos += 2;
                 }

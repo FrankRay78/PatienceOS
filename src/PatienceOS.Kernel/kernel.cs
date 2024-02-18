@@ -2,9 +2,17 @@ using PatienceOS.Kernel;
 
 class Program
 {
+    private const int VideoBaseAddress = 0xb8000;
+
+    // Assumes VGA text mode 7 (80 x 25)
+    // ref: https://en.wikipedia.org/wiki/VGA_text_mode
+    private const int Width = 80;
+    private const int Height = 25;
+
     static int Main()
     {
-        var console = new Console();
+        var frameBuffer = new FrameBuffer(VideoBaseAddress);
+        var console = new Console(Width, Height, frameBuffer);
 
 
         console.Clear();

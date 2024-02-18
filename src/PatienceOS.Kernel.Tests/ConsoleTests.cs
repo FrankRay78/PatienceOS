@@ -13,5 +13,19 @@ namespace PatienceOS.Kernel.Tests
 
             await Assert.ThrowsAsync<Exception>(() => throw new Exception());
         }
+
+        [Fact]
+        public async Task Console_Should_Write_HelloWorld_Async()
+        {
+            // Given
+            var frameBuffer = new FrameBuffer(0xb8000);
+            var console = new Console(80, 25, frameBuffer);
+
+            // When
+            console.Print("Hello World");
+
+            // Then
+            //TODO: framebuffer.contains("Hello World");
+        }
     }
 }
