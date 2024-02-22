@@ -1,4 +1,5 @@
 using PatienceOS.Kernel;
+using System;
 
 class Program
 {
@@ -11,9 +12,15 @@ class Program
 
     static int Main()
     {
-        var frameBuffer = new FrameBuffer(VideoBaseAddress);
+        // Reverse engineering natively-compiled .NET apps
+        // https://migeel.sk/blog/2023/09/15/reverse-engineering-natively-compiled-dotnet-apps/
+
+        var frameBuffer = new VideoMemory(VideoBaseAddress);
         var console = new Console(Width, Height, frameBuffer);
 
+        Nullable<VideoMemory> vm;
+        
+        
 
         console.Clear();
 
