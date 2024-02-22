@@ -1,7 +1,6 @@
 using PatienceOS.Kernel;
-using System;
 
-class Program
+unsafe class Program
 {
     private const int VideoBaseAddress = 0xb8000;
 
@@ -15,12 +14,9 @@ class Program
         // Reverse engineering natively-compiled .NET apps
         // https://migeel.sk/blog/2023/09/15/reverse-engineering-natively-compiled-dotnet-apps/
 
-        var frameBuffer = new VideoMemory(VideoBaseAddress);
+        var frameBuffer = new FrameBuffer((byte*)VideoBaseAddress);
         var console = new Console(Width, Height, frameBuffer);
 
-        Nullable<VideoMemory> vm;
-        
-        
 
         console.Clear();
 

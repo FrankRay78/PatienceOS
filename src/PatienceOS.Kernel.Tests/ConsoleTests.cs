@@ -2,30 +2,25 @@
 
 namespace PatienceOS.Kernel.Tests
 {
-    public class ConsoleTests
+    unsafe public class ConsoleTests
     {
         [Fact]
-        public async Task ConsoleShouldThrowAsync()
-        {
-            //Attempts to write directly to the video memory
-            //Assert.Throws<Exception>(() => Console.Clear());
-            //The active test run was aborted. Reason: Test host process crashed : Fatal error. System.AccessViolationException: Attempted to read or write protected memory.
-
-            await Assert.ThrowsAsync<Exception>(() => throw new Exception());
-        }
-
-        [Fact]
-        public async Task Console_Should_Write_HelloWorld_Async()
+        public void Console_Should_Write_Hello()
         {
             // Given
-            var frameBuffer = new VideoMemory(0xb8000);
+            byte* buffer = stackalloc byte[80 * 25 * 2];
+            var frameBuffer = new FrameBuffer(buffer);
             var console = new Console(80, 25, frameBuffer);
 
             // When
-            console.Print("Hello World");
+            console.Print("Hello");
 
             // Then
-            //TODO: framebuffer.contains("Hello World");
+            Assert.Equal((byte)'H', frameBuffer.Fetch(0));
+            Assert.Equal((byte)'e', frameBuffer.Fetch(2));
+            Assert.Equal((byte)'l', frameBuffer.Fetch(4));
+            Assert.Equal((byte)'l', frameBuffer.Fetch(6));
+            Assert.Equal((byte)'o', frameBuffer.Fetch(8));
         }
     }
 }

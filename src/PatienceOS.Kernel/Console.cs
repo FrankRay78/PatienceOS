@@ -8,11 +8,11 @@
         private int width;
         private int height;
 
-        private VideoMemory frameBuffer;
+        private FrameBuffer frameBuffer;
 
         private int pos = 0;
 
-        public Console(int width, int height, VideoMemory frameBuffer)
+        public Console(int width, int height, FrameBuffer frameBuffer)
         {
             this.width = width;
             this.height = height;
