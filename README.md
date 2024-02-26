@@ -60,6 +60,18 @@ Several tools are required in the build and link process. Update `src\setpath.cm
 
 Patience OS, a baremetal C# kernel, should boot in QEMU.
 
+## Developing PatienceOS
+
+There are three different ways to build PatienceOS, each with a very different purpose in mind. These are:
+
+File | Type | Purpose |
+--- | --- | --- 
+`build\build.cmd` | Windows Command script | Builds the kernel and boots in QEMU (see [Playing with PatienceOS](https://github.com/FrankRay78/PatienceOS#playing-with-patienceos) above for instructions)
+`src\PatienceOS.NoStdLib.sln` | Visual Studio 2022 solution; only contains the PatienceOS project | Builds and links the kernel against the custom .Net runtime, `zerosharp.cs`. Handy for when you are coding PatienceOS within Visual Studio and want to quickly check building against the custom runtime types.
+`src\PatienceOS.sln` | Visual Studio 2022 solution; contains the PatienceOS project and accompanying unit test project | Builds and links the kernel against the standard .Net 8.0 runtime. Allows you to run the PatienceOS unit tests within the built-in Visual Studio Test Explorer, as per any other unit test project. 
+
+I'm not currently accepting pull requests as this is a personal learning project. However, please feel free to raise issues if you want to discuss a particular matter with your fellow GitHub users and/or fork the repository for your own purposes.
+
 ## Build toolchain
 
 #### Commentary on the build process
