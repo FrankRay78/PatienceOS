@@ -37,8 +37,8 @@ namespace System
     public abstract class ValueType { }
     public abstract class Enum : ValueType { }
 
-    public sealed class String 
-    { 
+    public sealed class String
+    {
         public readonly int Length;
     }
 

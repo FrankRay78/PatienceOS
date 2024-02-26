@@ -3,8 +3,8 @@
 @call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
 
 :: Custom toolpaths
-@call "C:\Users\info\Documents\Repos\PatienceOS\src\setpath.cmd"
+@call "Y:\build\setpath.cmd"
 
-:: Change directory to source
-C:
-cd C:\Users\info\Documents\Repos\PatienceOS\src
+:: Change directory
+Y:
+cd build

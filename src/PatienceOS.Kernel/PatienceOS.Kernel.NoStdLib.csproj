@@ -17,13 +17,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="build.cmd" />
-    <None Remove="linker.ld" />
-    <None Remove="loader.asm" />
-    <None Remove="setpath.cmd" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="8.0.1" />
   </ItemGroup>
 
