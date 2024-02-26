@@ -134,7 +134,7 @@ A working backlog of Frank's personal learning objectives for 2024 (and beyond?)
 - [X] Basic terminal output (DONE, 10 Feb 2024, Displays a multiline splash screen/logo on boot, commit [c2850ae094a3db14cb4b74e465afa26ab3f4a49c](https://github.com/FrankRay78/PatienceOS/commit/c2850ae094a3db14cb4b74e465afa26ab3f4a49c))
 - [ ] See if I can get the Microsoft linker, link, to output exactly the same file as the GNU linker, ld
 - [ ] Advanced terminal output, including terminal sizes other than 80x25, buffered output and scrolling
-- [ ] Testable kernel components, including unit test framework and tests coverage (ideally leveraging an already established C# test framework eg. [NUnit](https://nunit.org/))
+- [X] Testable kernel components, including unit test framework and tests coverage (ideally leveraging an already established C# test framework eg. [NUnit](https://nunit.org/))
 - [ ] Hardware interrupts and outputting keyboard keystrokes to the screen.
 - [ ] Basic memory management ie. stack and heap allocation. Learn how this works underneath the covers for an AOT compiled C# kernel.
 - [ ] Advanced memory management, including allocation, virtual page management and garbage collection.
