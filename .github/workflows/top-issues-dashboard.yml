@@ -18,6 +18,6 @@ jobs:
           dashboard: true
           dashboard_show_total_reactions: true
           top_issues: true
-          top_bugs: true
-          top_features: true
-          top_pull_requests: true
+          top_bugs: false
+          top_features: false
+          top_pull_requests: false
