@@ -14,7 +14,7 @@ jobs:
         env:
           github_token: ${{ secrets.GITHUB_TOKEN }}
         with:
-          label: false
+          label: true
           dashboard: true
           dashboard_show_total_reactions: true
           top_issues: true
