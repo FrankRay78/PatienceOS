@@ -13,6 +13,9 @@ I will lean heavily on OSDev Wiki ([C Sharp Bare Bones](https://wiki.osdev.org/C
 The obligatory screenshot, which (at the moment), is pretty underwhelming I admit:
 ![PatienceOS - boot splash](https://github.com/FrankRay78/PatienceOS/assets/52075808/4ffa65a2-9818-4502-a2cf-ceee99b70e93)
 
+> [!IMPORTANT]\
+> Please upvote :+1: the [issues](https://github.com/FrankRay78/PatienceOS/issues) you are most interested in, the [Top Issues Dashboard](https://github.com/FrankRay78/PatienceOS/issues/5) tracks community interest. 
+
 ## Playing with PatienceOS
 
 ### Windows 10 Host
