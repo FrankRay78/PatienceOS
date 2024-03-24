@@ -13,6 +13,9 @@ I will lean heavily on OSDev Wiki ([C Sharp Bare Bones](https://wiki.osdev.org/C
 The obligatory screenshot, which (at the moment), is pretty underwhelming I admit:
 ![PatienceOS - boot splash](https://github.com/FrankRay78/PatienceOS/assets/52075808/4ffa65a2-9818-4502-a2cf-ceee99b70e93)
 
+> [!IMPORTANT]\
+> Please upvote :+1: the [issues](https://github.com/FrankRay78/PatienceOS/issues) you are most interested in, the [Top Issues Dashboard](https://github.com/FrankRay78/PatienceOS/issues/5) tracks community interest. 
+
 ## Playing with PatienceOS
 
 ### Windows 10 Host
@@ -70,7 +73,13 @@ File | Type | Purpose |
 `src\PatienceOS.NoStdLib.sln` | Visual Studio 2022 solution; only contains the PatienceOS project | Builds and links the kernel against the custom .Net runtime, `zerosharp.cs`. Handy for when you are coding PatienceOS within Visual Studio and want to quickly check building against the custom runtime types.
 `src\PatienceOS.sln` | Visual Studio 2022 solution; contains the PatienceOS project and accompanying unit test project | Builds and links the kernel against the standard .Net 8.0 runtime. Allows you to run the PatienceOS unit tests within the built-in Visual Studio Test Explorer, as per any other unit test project. 
 
-I'm not currently accepting pull requests as this is a personal learning project. However, please feel free to raise issues if you want to discuss a particular matter with your fellow GitHub users and/or fork the repository for your own purposes.
+## Contributing
+> [!IMPORTANT]\
+> I'm not currently accepting pull requests as this is a personal learning project. 
+
+Please upvote :+1: any existing [issues](https://github.com/FrankRay78/PatienceOS/issues) you are interested in being worked on. You can also contribute to discussions with your fellow GitHub users and me by commenting on existing issues, and by raising new issues you want to be considered for development.
+
+All reasonable interactions are welcomed but please **don't be offended** if I close or delete issues or comments etc, as I see fit, as this is my personal learning project. You are welcome to fork the repository for your own purposes. 
 
 ## Build toolchain
 
