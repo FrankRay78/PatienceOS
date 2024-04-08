@@ -153,8 +153,6 @@ A working backlog of Frank's personal learning objectives for 2024 (and beyond?)
 - [ ] Ultimately, host a TFTP server, see: [Tftp.Net C# Library](https://github.com/Callisto82/tftp.net), [Booting Arch Linux from PXE](https://www.saminiir.com/boot-arch-linux-from-pxe/)
 
 ## Blog posts
-Chronological order:
+A series of blog posts are being written alongside the development of PatienceOS, to capture learnings and chart progress. See: 
 
-1. 20231115 [Writing an OS in C#](https://frankray.net/blog/2023/11/writing-an-os-in-csharp-dotnet/)
-2. 20240104 [Compiling a C# kernel to bare metal and booting in QEMU](https://frankray.net/blog/2024/01/compiling-a-csharp-kernel-to-bare-metal-and-booting-in-qemu/)
-3. 20240209 [PatienceOS isn’t living up to its name](https://frankray.net/blog/2024/02/patienceos-isnt-living-up-to-its-name/)
+[PatienceOS blog posts](https://frankray.net/blog/category/software-development/os-development/patienceos/)
