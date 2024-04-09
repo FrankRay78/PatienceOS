@@ -30,6 +30,8 @@
             }
         }
 
+        private byte foregroundColor = 0x0F;
+
         /// <summary>
         /// Print a string to the current cursor position
         /// </summary>
