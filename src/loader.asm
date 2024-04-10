@@ -19,8 +19,30 @@ section .text
     dd CHECKSUM
 
 _start:
-    cli                   ; block interrupts
+    cli                   ; block interrupts (nb. not necessary, as QEMU boots into 32-bit protected mode with interrupts disabled)
     mov esp, stack_space  ; set stack pointer
+
+
+enablesse:
+    ; Is SSE supported on this CPU?
+    mov eax, 0x1
+    cpuid
+    test edx, 1<<25
+    jnz .sse                   ; If SSE supported enable it.
+.nosse:
+    ; SSE not supported - do something like print an error and stop
+    jmp $
+
+.sse:
+    ;now enable SSE and the like
+    mov eax, cr0
+    and ax, 0xFFFB             ; clear coprocessor emulation CR0.EM
+    or ax, 0x2                 ; set coprocessor monitoring  CR0.MP
+    mov cr0, eax
+    mov eax, cr4
+    or ax, 3 << 9              ; set CR4.OSFXSR and CR4.OSXMMEXCPT at the same time
+    mov cr4, eax
+
 
     ; Call Main
     call __managed__Main
