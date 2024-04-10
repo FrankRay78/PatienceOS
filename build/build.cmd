@@ -23,7 +23,7 @@ nasm -f win32 -o loader.obj ../src/loader.asm || goto Error
 
 ld -m i386pe -T ../src/linker.ld -o kernel.bin loader.obj kernel.obj || goto Error
 objcopy -O elf32-i386 kernel.bin kernel.elf || goto Error
-qemu-system-i386 -kernel kernel.elf -d int -no-reboot -no-shutdown || goto Error
+qemu-system-i386 -cpu pentium3 -kernel kernel.elf -d int -no-reboot -no-shutdown || goto Error
 
 cd ..\build
 exit /B

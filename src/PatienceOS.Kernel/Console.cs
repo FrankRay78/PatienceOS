@@ -11,6 +11,7 @@
         private FrameBuffer frameBuffer;
 
         private int pos = 0;
+        private byte foregroundColor = 0x0F; // White
 
         public Console(int width, int height, FrameBuffer frameBuffer)
         {
@@ -30,8 +31,6 @@
             }
         }
 
-        private byte foregroundColor = 0x0F;
-
         /// <summary>
         /// Print a string to the current cursor position
         /// </summary>
@@ -42,7 +41,7 @@
                 for (int i = 0; i < s.Length; i++)
                 {
                     frameBuffer.Write(pos, (byte)ps[i]);
-                    frameBuffer.Write(pos + 1, 0x0F);
+                    frameBuffer.Write(pos + 1, foregroundColor);
 
                     pos += 2;
                 }
