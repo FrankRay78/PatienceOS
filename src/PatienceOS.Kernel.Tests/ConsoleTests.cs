@@ -4,6 +4,64 @@ namespace PatienceOS.Kernel.Tests
 {
     unsafe public class ConsoleTests
     {
+        [Fact]
+        public void Should_Write_AB()
+        {
+            // Given
+            byte* buffer = stackalloc byte[80 * 25 * 2];
+            var frameBuffer = new FrameBuffer(buffer);
+            var console = new Console(80, 25, frameBuffer);
+
+            // When
+            console.Print("AB");
+
+            // Then
+            Assert.Equal((byte)'A', buffer[0]);
+            Assert.Equal((byte)'B', buffer[2]);
+        }
+
+        [Fact]
+        public void Should_Write_A_EOL_B()
+        {
+            // Given
+            byte* buffer = stackalloc byte[80 * 25 * 2];
+            var frameBuffer = new FrameBuffer(buffer);
+            var console = new Console(80, 25, frameBuffer);
+
+            // When
+            console.Print("A\nB");
+
+            // Then
+            Assert.Equal((byte)'A', buffer[0]);
+            Assert.Equal((byte)'B', buffer[80 * 2 + 0]);
+        }
+
+        unsafe public class ThreeXThree
+        {
+            [Fact]
+            public void Should_Write_ABC_EOL_DEF_EOL_GHI()
+            {
+                // Given
+                byte* buffer = stackalloc byte[3 * 3 * 2];
+                var frameBuffer = new FrameBuffer(buffer);
+                var console = new Console(3, 3, frameBuffer);
+
+                // When
+                console.Print("ABCDEFGHI");
+
+                // Then
+                Assert.Equal((byte)'A', buffer[0]);
+                Assert.Equal((byte)'B', buffer[2]);
+                Assert.Equal((byte)'C', buffer[4]);
+                Assert.Equal((byte)'D', buffer[6]);
+                Assert.Equal((byte)'E', buffer[8]);
+                Assert.Equal((byte)'F', buffer[10]);
+                Assert.Equal((byte)'G', buffer[12]);
+                Assert.Equal((byte)'H', buffer[14]);
+                Assert.Equal((byte)'I', buffer[16]);
+            }
+        }
+
         unsafe public class HelloWorld
         {
             [Fact]
