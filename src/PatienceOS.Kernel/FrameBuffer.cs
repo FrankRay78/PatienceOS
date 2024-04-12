@@ -12,11 +12,6 @@
             this.buffer = buffer;
         }
 
-        public byte Fetch(int position)
-        {
-            return buffer[position];
-        }
-
         public void Write(int position, byte value)
         {
             buffer[position] = value;
