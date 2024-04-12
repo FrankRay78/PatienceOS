@@ -19,11 +19,11 @@ namespace PatienceOS.Kernel.Tests
             frameBuffer.Write(4, (byte)'o');
 
             // Then
-            Assert.Equal((byte)'H', frameBuffer.Fetch(0));
-            Assert.Equal((byte)'e', frameBuffer.Fetch(1));
-            Assert.Equal((byte)'l', frameBuffer.Fetch(2));
-            Assert.Equal((byte)'l', frameBuffer.Fetch(3));
-            Assert.Equal((byte)'o', frameBuffer.Fetch(4));
+            Assert.Equal((byte)'H', buffer[0]);
+            Assert.Equal((byte)'e', buffer[1]);
+            Assert.Equal((byte)'l', buffer[2]);
+            Assert.Equal((byte)'l', buffer[3]);
+            Assert.Equal((byte)'o', buffer[4]);
         }
     }
 }

@@ -47,5 +47,15 @@
                 }
             }
         }
+
+        /// <summary>
+        /// Prints a string to the current cursor position 
+        /// and then moves the cursor to the next line
+        /// </summary>
+        public void PrintLine(string s)
+        {
+            Print(s);
+            Print("\n");
+        }
     }
 }
