@@ -27,9 +27,11 @@
         /// </summary>
         public void Clear()
         {
-            for (int i = 0; i < width * height * 2; i++)
+            for (int i = 0; i < width * height * 2; i += 2)
             {
-                frameBuffer.Write(i, 0);
+                // Write directly to the video memory
+                frameBuffer.Write(i, (byte)' ');
+                frameBuffer.Write(i + 1, foregroundColor);
             }
 
             // Reset the cursor position
@@ -41,7 +43,8 @@
         /// Print a string to the current cursor position
         /// </summary>
         /// <remarks>
-        /// Assumes each screen character is represented by two bytes aligned as a 16-bit word, see <see cref="https://en.wikipedia.org/wiki/VGA_text_mode#Data_arrangement"/>
+        /// Assumes each screen character is represented by two bytes aligned as a 16-bit word, 
+        /// see <see cref="https://en.wikipedia.org/wiki/VGA_text_mode#Data_arrangement"/>
         /// </remarks>
         public void Print(string s)
         {

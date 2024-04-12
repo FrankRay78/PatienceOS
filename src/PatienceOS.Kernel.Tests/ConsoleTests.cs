@@ -21,6 +21,23 @@ namespace PatienceOS.Kernel.Tests
         }
 
         [Fact]
+        public void Should_Clear_AB()
+        {
+            // Given
+            byte* buffer = stackalloc byte[80 * 25 * 2];
+            var frameBuffer = new FrameBuffer(buffer);
+            var console = new Console(80, 25, frameBuffer);
+
+            // When
+            console.Print("AB");
+            console.Clear();
+
+            // Then
+            Assert.Equal((byte)' ', buffer[0]);
+            Assert.Equal((byte)' ', buffer[2]);
+        }
+
+        [Fact]
         public void Should_Write_A_EOL_B()
         {
             // Given
@@ -34,6 +51,23 @@ namespace PatienceOS.Kernel.Tests
             // Then
             Assert.Equal((byte)'A', buffer[0]);
             Assert.Equal((byte)'B', buffer[80 * 2 + 0]);
+        }
+
+        [Fact]
+        public void Should_Clear_A_EOL_B()
+        {
+            // Given
+            byte* buffer = stackalloc byte[80 * 25 * 2];
+            var frameBuffer = new FrameBuffer(buffer);
+            var console = new Console(80, 25, frameBuffer);
+
+            // When
+            console.Print("A\nB");
+            console.Clear();
+
+            // Then
+            Assert.Equal((byte)' ', buffer[0]);
+            Assert.Equal((byte)' ', buffer[80 * 2 + 0]);
         }
 
         unsafe public class ThreeXThree
