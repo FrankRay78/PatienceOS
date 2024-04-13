@@ -128,10 +128,10 @@ namespace PatienceOS.Kernel.Tests
                 var console = new Console(3, 3, frameBuffer);
 
                 // When
-                console.PrintLine("AAA");
-                console.PrintLine("BBB");
-                console.PrintLine("CCC");
-                console.PrintLine("DDD");
+                console.Print("AAA");
+                console.Print("BBB");
+                console.Print("CCC");
+                console.Print("DDD");
 
                 // Then
                 Assert.Equal((byte)'B', buffer[0]);
@@ -154,11 +154,11 @@ namespace PatienceOS.Kernel.Tests
                 var console = new Console(3, 3, frameBuffer);
 
                 // When
-                console.PrintLine("AAA");
-                console.PrintLine("BBB");
-                console.PrintLine("CCC");
-                console.PrintLine("DDD");
-                console.PrintLine("EEE");
+                console.Print("AAA");
+                console.Print("BBB");
+                console.Print("CCC");
+                console.Print("DDD");
+                console.Print("EEE");
 
                 // Then
                 Assert.Equal((byte)'C', buffer[0]);
@@ -181,12 +181,12 @@ namespace PatienceOS.Kernel.Tests
                 var console = new Console(3, 3, frameBuffer);
 
                 // When
-                console.PrintLine("AAA");
-                console.PrintLine("BBB");
-                console.PrintLine("CCC");
-                console.PrintLine("DDD");
-                console.PrintLine("EEE");
-                console.PrintLine("FFF");
+                console.Print("AAA");
+                console.Print("BBB");
+                console.Print("CCC");
+                console.Print("DDD");
+                console.Print("EEE");
+                console.Print("FFF");
 
                 // Then
                 Assert.Equal((byte)'D', buffer[0]);
@@ -198,6 +198,32 @@ namespace PatienceOS.Kernel.Tests
                 Assert.Equal((byte)'F', buffer[12]);
                 Assert.Equal((byte)'F', buffer[14]);
                 Assert.Equal((byte)'F', buffer[16]);
+            }
+
+            [Fact]
+            public void Should_Scroll_And_Blank_Last_Line()
+            {
+                // Given
+                byte* buffer = stackalloc byte[3 * 3 * 2];
+                var frameBuffer = new FrameBuffer(buffer);
+                var console = new Console(3, 3, frameBuffer);
+
+                // When
+                console.Print("AAA");
+                console.Print("BBB");
+                console.Print("CCC");
+                console.Print("D");
+
+                // Then
+                Assert.Equal((byte)'B', buffer[0]);
+                Assert.Equal((byte)'B', buffer[2]);
+                Assert.Equal((byte)'B', buffer[4]);
+                Assert.Equal((byte)'C', buffer[6]);
+                Assert.Equal((byte)'C', buffer[8]);
+                Assert.Equal((byte)'C', buffer[10]);
+                Assert.Equal((byte)'D', buffer[12]);
+                Assert.Equal((byte)' ', buffer[14]);
+                Assert.Equal((byte)' ', buffer[16]);
             }
         }
 

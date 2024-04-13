@@ -56,10 +56,53 @@
         }
 
         /// <summary>
+        /// Prints a string to the current cursor position 
+        /// and then moves the cursor to the next line
+        /// </summary>
+        public void PrintLine(string s)
+        {
+            Print(s);
+            Print("\n");
+        }
+
+        /// <summary>
+        /// Print a string to the current cursor position
+        /// </summary>
+        /// <remarks>
+        /// Assumes each screen character is represented by two bytes aligned as a 16-bit word, 
+        /// see <see cref="https://en.wikipedia.org/wiki/VGA_text_mode#Data_arrangement"/>
+        /// </remarks>
+        public void Print(string s)
+        {
+            fixed (char* ps = s)
+            {
+                for (int i = 0; i < s.Length; i++)
+                {
+                    Print(ps[i]);
+                }
+            }
+        }
+
+        /// <summary>
         /// Print a character to the current cursor position
         /// </summary>
         public void Print(char c)
         {
+            // Scroll if the cursor has dropped off the bottom of the terminal
+            if (row == height)
+            {
+                frameBuffer.Copy(width * 2, 0, (height - 1) * width * 2);
+
+                row--;
+
+                // Blank the last line ready for writing to
+                for (int i = 0; i < width; i++)
+                {
+                    frameBuffer.Write(row * width * 2 + i * 2, (byte)' ');
+                    frameBuffer.Write(row * width * 2 + i * 2 + 1, (byte)foregroundColor);
+                }
+            }
+
             // Perform a CRLF if we encounter a Newline character
             if (c == '\n')
             {
@@ -84,34 +127,6 @@
                 column = 0;
                 row++;
             }
-        }
-
-        /// <summary>
-        /// Print a string to the current cursor position
-        /// </summary>
-        /// <remarks>
-        /// Assumes each screen character is represented by two bytes aligned as a 16-bit word, 
-        /// see <see cref="https://en.wikipedia.org/wiki/VGA_text_mode#Data_arrangement"/>
-        /// </remarks>
-        public void Print(string s)
-        {
-            fixed (char* ps = s)
-            {
-                for (int i = 0; i < s.Length; i++)
-                {
-                    Print(ps[i]);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Prints a string to the current cursor position 
-        /// and then moves the cursor to the next line
-        /// </summary>
-        public void PrintLine(string s)
-        {
-            Print(s);
-            Print("\n");
         }
     }
 }
