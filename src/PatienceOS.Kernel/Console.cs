@@ -10,7 +10,7 @@
 
         private FrameBuffer frameBuffer;
 
-        private int column = 0; // nb. Incremented by two for each write, to account for the text colouring
+        private int column = 0;
         private int row = 0;
 
         private Color foregroundColor;
@@ -71,17 +71,17 @@
 
                     // Perform a CRLF when the cursor reaches the end of the terminal line
                     // eg.column is 0 to 79, width = 80
-                    if (column >= width * 2)
+                    if (column == width)
                     {
                         column = 0;
                         row++;
                     }
 
                     // Write directly to the video memory
-                    frameBuffer.Write(row * width * 2 + column, ps[i], foregroundColor);
+                    frameBuffer.Write(row * width * 2 + column * 2, ps[i], foregroundColor);
 
-                    //  Move the cursor right by one
-                    column += 2;
+                    //  Move the cursor right by one character
+                    column++;
                 }
             }
         }
