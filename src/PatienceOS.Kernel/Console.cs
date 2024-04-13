@@ -10,28 +10,44 @@
 
         private FrameBuffer frameBuffer;
 
-        private int column = 0; // nb. Incremented by two for each write, to account for the text colouring
+        private int column = 0;
         private int row = 0;
 
-        private byte foregroundColor = 0x0F; // White
+        private Color foregroundColor;
+
 
         public Console(int width, int height, FrameBuffer frameBuffer)
         {
             this.width = width;
             this.height = height;
+            this.foregroundColor = Color.White;
             this.frameBuffer = frameBuffer;
         }
+
+        public Console(int width, int height, Color foregroundColor, FrameBuffer frameBuffer)
+        {
+            this.width = width;
+            this.height = height;
+            this.foregroundColor = foregroundColor;
+            this.frameBuffer = frameBuffer;
+        }
+
 
         /// <summary>
         /// Clear the screen
         /// </summary>
+        /// <remarks>
+        /// Blanks the screen by writing the ASCII space character to each character cell
+        /// </remarks>
         public void Clear()
         {
-            for (int i = 0; i < width * height * 2; i += 2)
+            // Reset the cursor position
+            column = 0;
+            row = 0;
+
+            for (int i = 0; i < width * height; i++)
             {
-                // Write directly to the video memory
-                frameBuffer.Write(i, (byte)' ');
-                frameBuffer.Write(i + 1, foregroundColor);
+                Print(' ');
             }
 
             // Reset the cursor position
@@ -40,53 +56,90 @@
         }
 
         /// <summary>
-        /// Print a string to the current cursor position
-        /// </summary>
-        /// <remarks>
-        /// Assumes each screen character is represented by two bytes aligned as a 16-bit word, 
-        /// see <see cref="https://en.wikipedia.org/wiki/VGA_text_mode#Data_arrangement"/>
-        /// </remarks>
-        public void Print(string s)
-        {
-            fixed (char* ps = s)
-            {
-                for (int i = 0; i < s.Length; i++)
-                {
-                    // Perform a CRLF if we encounter a Newline character
-                    if (ps[i] == '\n')
-                    {
-                        column = 0;
-                        row++;
-
-                        continue;
-                    }
-
-                    // Perform a CRLF when the cursor reaches the end of the terminal line
-                    // eg.column is 0 to 79, width = 80
-                    if (column >= width * 2)
-                    {
-                        column = 0;
-                        row++;
-                    }
-
-                    // Write directly to the video memory
-                    frameBuffer.Write(row * width * 2 + column, (byte)ps[i]);
-                    frameBuffer.Write(row * width * 2 + column + 1, foregroundColor);
-
-                    //  Move the cursor right by one
-                    column += 2;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Prints a string to the current cursor position 
+        /// Print a string to the current cursor position 
         /// and then moves the cursor to the next line
         /// </summary>
         public void PrintLine(string s)
         {
             Print(s);
             Print("\n");
+        }
+
+        /// <summary>
+        /// Print a string to the current cursor position
+        /// </summary>
+        public void Print(string s)
+        {
+            fixed (char* ps = s)
+            {
+                for (int i = 0; i < s.Length; i++)
+                {
+                    Print(ps[i]);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Print a character to the current cursor position
+        /// </summary>
+        public void Print(char c)
+        {
+            // Scroll if the cursor has dropped off the bottom of the terminal
+            if (row == height)
+            {
+                frameBuffer.Copy(width * 2, 0, (height - 1) * width * 2);
+
+                row--;
+
+                // Blank the last line ready for writing to
+                for (int i = 0; i < width; i++)
+                {
+                    WriteVGATextCharacter(' ');
+
+                    // Move the cursor right by one character
+                    column++;
+                }
+
+                // Move the cursor to the beginning of the current line
+                column = 0;
+            }
+
+            // Perform a CRLF if we encounter a Newline character
+            if (c == '\n')
+            {
+                column = 0;
+                row++;
+
+                return;
+            }
+
+            WriteVGATextCharacter(c);
+
+            // Move the cursor right by one character
+            column++;
+
+            // Perform a CRLF when the cursor reaches the end of the terminal line
+            // eg.column is 0 to 79, width = 80
+            if (column == width)
+            {
+                column = 0;
+                row++;
+            }
+        }
+
+        /// <summary>
+        /// Write directly to the video memory, calculating the 
+        /// positional index required for the linear framebuffer
+        /// </summary>
+        /// <remarks>
+        /// Assumes each screen character is represented by two bytes aligned as a 16-bit word, 
+        /// see <see cref="https://en.wikipedia.org/wiki/VGA_text_mode#Data_arrangement"/>
+        /// </remarks>
+        private void WriteVGATextCharacter(char c) 
+        {
+            frameBuffer.Write(row * width * 2 + column * 2, (byte)c);
+            frameBuffer.Write(row * width * 2 + column * 2 + 1, (byte)foregroundColor);
+            //TODO: background color
         }
     }
 }
