@@ -56,7 +56,7 @@
         }
 
         /// <summary>
-        /// Prints a string to the current cursor position 
+        /// Print a string to the current cursor position 
         /// and then moves the cursor to the next line
         /// </summary>
         public void PrintLine(string s)
@@ -68,10 +68,6 @@
         /// <summary>
         /// Print a string to the current cursor position
         /// </summary>
-        /// <remarks>
-        /// Assumes each screen character is represented by two bytes aligned as a 16-bit word, 
-        /// see <see cref="https://en.wikipedia.org/wiki/VGA_text_mode#Data_arrangement"/>
-        /// </remarks>
         public void Print(string s)
         {
             fixed (char* ps = s)
@@ -98,9 +94,14 @@
                 // Blank the last line ready for writing to
                 for (int i = 0; i < width; i++)
                 {
-                    frameBuffer.Write(row * width * 2 + i * 2, (byte)' ');
-                    frameBuffer.Write(row * width * 2 + i * 2 + 1, (byte)foregroundColor);
+                    WriteVGATextCharacter(' ');
+
+                    // Move the cursor right by one character
+                    column++;
                 }
+
+                // Move the cursor to the beginning of the current line
+                column = 0;
             }
 
             // Perform a CRLF if we encounter a Newline character
@@ -112,10 +113,7 @@
                 return;
             }
 
-            // Write directly to the video memory, calculating the
-            // positional index required for the linear framebuffer
-            frameBuffer.Write(row * width * 2 + column * 2, (byte)c);
-            frameBuffer.Write(row * width * 2 + column * 2 + 1, (byte)foregroundColor);
+            WriteVGATextCharacter(c);
 
             // Move the cursor right by one character
             column++;
@@ -127,6 +125,21 @@
                 column = 0;
                 row++;
             }
+        }
+
+        /// <summary>
+        /// Write directly to the video memory, calculating the 
+        /// positional index required for the linear framebuffer
+        /// </summary>
+        /// <remarks>
+        /// Assumes each screen character is represented by two bytes aligned as a 16-bit word, 
+        /// see <see cref="https://en.wikipedia.org/wiki/VGA_text_mode#Data_arrangement"/>
+        /// </remarks>
+        private void WriteVGATextCharacter(char c) 
+        {
+            frameBuffer.Write(row * width * 2 + column * 2, (byte)c);
+            frameBuffer.Write(row * width * 2 + column * 2 + 1, (byte)foregroundColor);
+            //TODO: background color
         }
     }
 }
