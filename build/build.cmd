@@ -13,7 +13,7 @@ rmdir /S /Q ..\bin >nul 2>&1
 mkdir ..\bin
 cd ..\bin
 
-csc /debug:embedded /noconfig /nostdlib /runtimemetadataversion:v4.0.30319 ../src/PatienceOS.Kernel/kernel.cs ../src/PatienceOS.Kernel/Console.cs ../src/PatienceOS.Kernel/FrameBuffer.cs ../src/PatienceOS.Kernel/zerosharp.cs /out:kernel.ilexe /langversion:latest /unsafe || goto Error
+csc /debug:embedded /noconfig /nostdlib /runtimemetadataversion:v4.0.30319 ../src/PatienceOS.Kernel/Color.cs ../src/PatienceOS.Kernel/Console.cs ../src/PatienceOS.Kernel/FrameBuffer.cs ../src/PatienceOS.Kernel/kernel.cs ../src/PatienceOS.Kernel/zerosharp.cs /out:kernel.ilexe /langversion:latest /unsafe || goto Error
 ilc --targetos windows --targetarch x86 --instruction-set base --verbose kernel.ilexe -g -o kernel.obj --systemmodule kernel --map kernel.map -O || goto Error
 nasm -f win32 -o loader.obj ../src/loader.asm || goto Error
 
@@ -23,7 +23,8 @@ nasm -f win32 -o loader.obj ../src/loader.asm || goto Error
 
 ld -m i386pe -T ../src/linker.ld -o kernel.bin loader.obj kernel.obj || goto Error
 objcopy -O elf32-i386 kernel.bin kernel.elf || goto Error
-qemu-system-i386 -cpu pentium3 -kernel kernel.elf -d int -no-reboot -no-shutdown || goto Error
+qemu-system-i386 -cpu pentium3 -kernel kernel.elf -no-reboot -no-shutdown || goto Error
+:: qemu-system-i386 -cpu pentium3 -kernel kernel.elf -d int -no-reboot -no-shutdown || goto Error
 
 cd ..\build
 exit /B

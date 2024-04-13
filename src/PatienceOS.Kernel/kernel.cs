@@ -15,7 +15,7 @@ unsafe class Program
         // https://migeel.sk/blog/2023/09/15/reverse-engineering-natively-compiled-dotnet-apps/
 
         var frameBuffer = new FrameBuffer((byte*)VideoBaseAddress);
-        var console = new Console(Width, Height, frameBuffer);
+        var console = new Console(Width, Height, Color.Green, frameBuffer);
 
 
         console.Clear();
