@@ -71,7 +71,8 @@
 
             // Write directly to the video memory, calculating the
             // positional index required for the linear framebuffer
-            frameBuffer.Write(row * width * 2 + column * 2, c, foregroundColor);
+            frameBuffer.Write(row * width * 2 + column * 2, (byte)c);
+            frameBuffer.Write(row * width * 2 + column * 2 + 1, (byte)foregroundColor);
 
             // Move the cursor right by one character
             column++;
