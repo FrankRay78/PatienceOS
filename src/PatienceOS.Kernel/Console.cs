@@ -15,6 +15,7 @@
 
         private Color foregroundColor;
 
+
         public Console(int width, int height, FrameBuffer frameBuffer)
         {
             this.width = width;
@@ -31,20 +32,57 @@
             this.frameBuffer = frameBuffer;
         }
 
+
         /// <summary>
         /// Clear the screen
         /// </summary>
+        /// <remarks>
+        /// Blanks the screen by writing the ASCII space character to each character cell
+        /// </remarks>
         public void Clear()
         {
-            for (int i = 0; i < width * height * 2; i += 2)
+            // Reset the cursor position
+            column = 0;
+            row = 0;
+
+            for (int i = 0; i < width * height; i++)
             {
-                // Write directly to the video memory
-                frameBuffer.Write(i, ' ', foregroundColor);
+                Print(' ');
             }
 
             // Reset the cursor position
             column = 0;
             row = 0;
+        }
+
+        /// <summary>
+        /// Print a character to the current cursor position
+        /// </summary>
+        public void Print(char c)
+        {
+            // Perform a CRLF if we encounter a Newline character
+            if (c == '\n')
+            {
+                column = 0;
+                row++;
+
+                return;
+            }
+
+            // Write directly to the video memory, calculating the
+            // positional index required for the linear framebuffer
+            frameBuffer.Write(row * width * 2 + column * 2, c, foregroundColor);
+
+            // Move the cursor right by one character
+            column++;
+
+            // Perform a CRLF when the cursor reaches the end of the terminal line
+            // eg.column is 0 to 79, width = 80
+            if (column == width)
+            {
+                column = 0;
+                row++;
+            }
         }
 
         /// <summary>
@@ -60,28 +98,7 @@
             {
                 for (int i = 0; i < s.Length; i++)
                 {
-                    // Perform a CRLF if we encounter a Newline character
-                    if (ps[i] == '\n')
-                    {
-                        column = 0;
-                        row++;
-
-                        continue;
-                    }
-
-                    // Perform a CRLF when the cursor reaches the end of the terminal line
-                    // eg.column is 0 to 79, width = 80
-                    if (column == width)
-                    {
-                        column = 0;
-                        row++;
-                    }
-
-                    // Write directly to the video memory
-                    frameBuffer.Write(row * width * 2 + column * 2, ps[i], foregroundColor);
-
-                    //  Move the cursor right by one character
-                    column++;
+                    Print(ps[i]);
                 }
             }
         }
