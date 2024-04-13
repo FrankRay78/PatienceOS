@@ -13,12 +13,21 @@
         private int column = 0; // nb. Incremented by two for each write, to account for the text colouring
         private int row = 0;
 
-        private byte foregroundColor = 0x0F; // White
+        private Color foregroundColor;
 
         public Console(int width, int height, FrameBuffer frameBuffer)
         {
             this.width = width;
             this.height = height;
+            this.foregroundColor = Color.White;
+            this.frameBuffer = frameBuffer;
+        }
+
+        public Console(int width, int height, Color foregroundColor, FrameBuffer frameBuffer)
+        {
+            this.width = width;
+            this.height = height;
+            this.foregroundColor = foregroundColor;
             this.frameBuffer = frameBuffer;
         }
 
@@ -30,8 +39,7 @@
             for (int i = 0; i < width * height * 2; i += 2)
             {
                 // Write directly to the video memory
-                frameBuffer.Write(i, (byte)' ');
-                frameBuffer.Write(i + 1, foregroundColor);
+                frameBuffer.Write(i, ' ', foregroundColor);
             }
 
             // Reset the cursor position
@@ -70,8 +78,7 @@
                     }
 
                     // Write directly to the video memory
-                    frameBuffer.Write(row * width * 2 + column, (byte)ps[i]);
-                    frameBuffer.Write(row * width * 2 + column + 1, foregroundColor);
+                    frameBuffer.Write(row * width * 2 + column, ps[i], foregroundColor);
 
                     //  Move the cursor right by one
                     column += 2;

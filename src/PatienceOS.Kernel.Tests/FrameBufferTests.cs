@@ -10,13 +10,14 @@ namespace PatienceOS.Kernel.Tests
             // Given
             byte* buffer = stackalloc byte[5];
             var frameBuffer = new FrameBuffer(buffer);
+            Color foregroundColor = Color.White;
 
             // When
-            frameBuffer.Write(0, (byte)'H');
-            frameBuffer.Write(1, (byte)'e');
-            frameBuffer.Write(2, (byte)'l');
-            frameBuffer.Write(3, (byte)'l');
-            frameBuffer.Write(4, (byte)'o');
+            frameBuffer.Write(0, 'H', foregroundColor);
+            frameBuffer.Write(1, 'e', foregroundColor);
+            frameBuffer.Write(2, 'l', foregroundColor);
+            frameBuffer.Write(3, 'l', foregroundColor);
+            frameBuffer.Write(4, 'o', foregroundColor);
 
             // Then
             Assert.Equal((byte)'H', buffer[0]);

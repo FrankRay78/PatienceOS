@@ -12,9 +12,10 @@
             this.buffer = buffer;
         }
 
-        public void Write(int position, byte value)
+        public void Write(int position, char value, Color forgroundColor)
         {
-            buffer[position] = value;
+            buffer[position] = (byte)value;
+            buffer[position + 1] = (byte)forgroundColor;
         }
     }
 }
