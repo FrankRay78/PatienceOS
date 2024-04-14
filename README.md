@@ -4,10 +4,7 @@ A baremetal C# kernel - Frank Ray, [Better Software UK](https://bettersoftware.u
 Built using a combination of Microsoft's C# IL and native AOT compilers, and the GNU toolchain.
 
 #### Commentary on the name
-PatienceOS was chosen to remind Frank this is a 12-month initial project (at least), as part of his [2024 professional development](https://frankray.net/blog/2023/11/writing-an-os-in-csharp-dotnet/) goals. The dopamine hit from quickly pushing out PR's, like he regularly enjoys from contributing to other OSS repos (eg. [spectre.console](https://github.com/spectreconsole/spectre.console)), simply won't be possible with OS development. Hence the need for patience, and perseverance.
-
-#### References
-I will lean heavily on OSDev Wiki ([C Sharp Bare Bones](https://wiki.osdev.org/C_Sharp_Bare_Bones) initially) and the tutorials written by Philipp Oppermann ([Writing an OS in Rust](https://os.phil-opp.com/)), Guanzhou Hu ([Hux kernel](https://github.com/josehu07/hux-kernel/wiki)) and Carlos Fenollosa ([os-tutorial](https://github.com/cfenollosa/os-tutorial)). Two reference OS's will be leveraged - [FlingOS](https://github.com/FlingOS/FlingOS) the C# educational operating system by Ed Nutting, and [Cosmos](https://github.com/CosmosOS/Cosmos) (C# Open Source Managed Operating System).
+PatienceOS was chosen to remind Frank this is a 12-month initial project (at least), as part of his [2024 professional development](https://frankray.net/blog/2023/11/writing-an-os-in-csharp-dotnet/) goals. The dopamine hit from quickly pushing out PR's, like he regularly enjoys from contributing to other open-source repos (eg. [spectre.console](https://github.com/spectreconsole/spectre.console)), simply won't be possible with OS development. Hence the need for patience, and perseverance.
 
 ## Progress
 The obligatory screenshot, which (at the moment), is pretty underwhelming I admit:
@@ -86,7 +83,7 @@ All reasonable interactions are welcomed but please **don't be offended** if I c
 #### Commentary on the build process
 Relying on Visual Studio specific, MSBuild or csproj files to build the kernel has been avoided in favour of directly calling the individual build tools. I want fine-grained control over the compile and link process, MSBuild feels like a poorly documented 'black box' that changes every .Net release in subtle ways that aren't clear, and I don't want to invest a huge amount of time developing a C# kernel only to find I can't build it in some future .Net release. 
 
-I would have sincerely loved to use [bflat](https://github.com/bflattened/bflat) as my IL to native compiler, but even that didn't seem to allow intermediate object file output for class libraries, and I didn't want to raise an issue requesting the CLI options expose more of the underlying compiler switches. And so I've stuck to the approach demo'd in [zerosharp](https://github.com/MichalStrehovsky/zerosharp), namely a Windows command/batch file ([build.cmd](https://github.com/MichalStrehovsky/zerosharp/blob/master/no-runtime/build.cmd)). 
+I would have sincerely loved to use [bflat](https://github.com/bflattened/bflat) as my IL to native compiler, but even that didn't seem to allow intermediate object file output for class libraries, and I didn't want to raise an issue requesting the CLI options expose more of the underlying compiler switches. And so I've stuck to the approach demo'd in [zerosharp](https://github.com/MichalStrehovsky/zerosharp), namely a Windows command/batch file ([build.cmd](https://github.com/FrankRay78/PatienceOS/blob/main/build/build.cmd)). 
 
 The following lines in the PatienceOS `src\build.cmd` are of particular note:
 
@@ -126,33 +123,5 @@ Environment | Findings
 `MSYS2/MINGW64` | Heaps of issues with spaces in path names, see [mingw make can't handle spaces in path?](https://stackoverflow.com/questions/5999507/mingw-make-cant-handle-spaces-in-path) as an example. Unfortunately, no amount of escaping, 8.3 shortening or quotes could get the csc compiler running from its default install location, C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\Roslyn\csc.exe
 `bflat` | bflat decides to output an executable when it finds a main() function, also seemingly without the intermediate object files. This is no good, given I also need to link in the compiled boot loader. (nb. with a bit of further effort, I suspect I might be able to include the bootloader asm directly in the csproj file, somehow)
 
-## References
-#### IL to Native compilation
-Inspiration has been drawn from the following precursors to the AOT compiler we see in .Net 7/8:
-* [bflat](https://github.com/bflattened/bflat) - C# as you know it but with Go-inspired tooling (small, self-contained, and native executables).
-* [zerosharp](https://github.com/MichalStrehovsky/zerosharp) - Demo of the potential of C# for systems programming with the .NET native ahead-of-time compilation technology.
-* [WDK.NET](https://github.com/ZeroLP/WDK.Net) - Windows Kernel Driver Development in C# with Windows Driver Kit (WDK).
-* [IL2CPU](https://github.com/CosmosOS/IL2CPU) - IL2CPU is a compiler for .NET IL code to compile to assembly language for direct booting.
-* [FlingOS](https://github.com/FlingOS/FlingOS) - An educational operating system written in C#. A great stepping stone from high to low-level development.
-
-## Experiments
-A working backlog of Frank's personal learning objectives for 2024 (and beyond?):
- 
-- [x] Ability to replace the standard Linux init process with a custom C application, compiled to bare metal and executable. (DONE, 18 Nov 2023, see: [Boot the Linux 6.x kernel in QEMU and run a custom C application as the init process](https://gist.github.com/FrankRay78/426011c03a7fb4f890eb5b4a068720c8))
-- [X] Using an emulator, boot in 32-bit protected mode ~~using GRUB2~~ (nb. QEMU can boot directly into 32-bit protected mode, saving the faff of making an ISO image) and output 'hello world' by writing directly to the VGA video memory. (DONE, 4 Jan 2024, see: [Compiling a C# kernel to bare metal and booting in QEMU](https://frankray.net/blog/2024/01/compiling-a-csharp-kernel-to-bare-metal-and-booting-in-qemu/))
-- [X] Basic terminal output (DONE, 10 Feb 2024, Displays a multiline splash screen/logo on boot, commit [c2850ae094a3db14cb4b74e465afa26ab3f4a49c](https://github.com/FrankRay78/PatienceOS/commit/c2850ae094a3db14cb4b74e465afa26ab3f4a49c))
-- [ ] See if I can get the Microsoft linker, link, to output exactly the same file as the GNU linker, ld
-- [ ] Advanced terminal output, including terminal sizes other than 80x25, buffered output and scrolling
-- [X] Testable kernel components, including unit test framework and tests coverage (ideally leveraging an already established C# test framework eg. [NUnit](https://nunit.org/))
-- [ ] Hardware interrupts and outputting keyboard keystrokes to the screen.
-- [ ] Basic memory management ie. stack and heap allocation. Learn how this works underneath the covers for an AOT compiled C# kernel.
-- [ ] Advanced memory management, including allocation, virtual page management and garbage collection.
-- [ ] Loading an elf into memory and executing it. Loading multiple instances of the elf and executing them (what do they share, and how is that allocated, managed etc)
-- [ ] Implement/port some useful routines from the C standard library ie. vfprintf ([master](https://git.musl-libc.org/cgit/musl/tree/src/stdio/vfprintf.c), [clone](https://github.com/BlankOn/musl/blob/master/src/stdio/printf.c))
-- [ ] Implement custom TCPIP stack, see: [Let's code a TCP/IP stack](https://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/), [Level-IP](https://github.com/saminiir/level-ip), [tapip](https://github.com/chobits/tapip)
-- [ ] Ultimately, host a TFTP server, see: [Tftp.Net C# Library](https://github.com/Callisto82/tftp.net), [Booting Arch Linux from PXE](https://www.saminiir.com/boot-arch-linux-from-pxe/)
-
 ## Blog posts
-A series of blog posts are being written alongside the development of PatienceOS, to capture learnings and chart progress. See: 
-
-[PatienceOS blog posts](https://frankray.net/blog/category/software-development/os-development/patienceos/)
+A series of blog posts are being written alongside the development of PatienceOS, to capture learnings and chart progress. See: [PatienceOS blog posts](https://frankray.net/blog/category/software-development/os-development/patienceos/)
