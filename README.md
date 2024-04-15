@@ -3,6 +3,31 @@ A baremetal C# kernel - Frank Ray, [Better Software UK](https://bettersoftware.u
 
 Built using a combination of Microsoft's C# IL and native AOT compilers, and the GNU toolchain.
 
+---
+
+#### Table of contents
+
+- [Commentary on the name](#commentary-on-the-name)
+- [Progress](https://github.com/FrankRay78/PatienceOS/blob/main/README.md#progress)
+- [Playing with PatienceOS](https://github.com/FrankRay78/PatienceOS/blob/main/README.md#playing-with-patienceos)
+  - [Windows 10 Host](https://github.com/FrankRay78/PatienceOS/blob/main/README.md#windows-10-host)
+  - [Installation](https://github.com/FrankRay78/PatienceOS/blob/main/README.md#installation)
+  - [Configuration](https://github.com/FrankRay78/PatienceOS/blob/main/README.md#configuration)
+    - [ILC, the Native .Net AOT compiler](https://github.com/FrankRay78/PatienceOS/blob/main/README.md#ilc-the-native-net-aot-compiler)
+    - [MSYS2 MINGW64](https://github.com/FrankRay78/PatienceOS/blob/main/README.md#msys2-mingw64)
+    - [Build tool paths](https://github.com/FrankRay78/PatienceOS/blob/main/README.md#build-tool-paths)
+  - [Booting](https://github.com/FrankRay78/PatienceOS/blob/main/README.md#booting)
+- [Developing PatienceOS](https://github.com/FrankRay78/PatienceOS/blob/main/README.md#developing-patienceos)
+- [Contributing](https://github.com/FrankRay78/PatienceOS/blob/main/README.md#contributing)
+- [Build toolchain](https://github.com/FrankRay78/PatienceOS/blob/main/README.md#build-toolchain)
+  - [Commentary on the build process](https://github.com/FrankRay78/PatienceOS/blob/main/README.md#commentary-on-the-build-process)
+    - [C# IL Compiler](https://github.com/FrankRay78/PatienceOS/blob/main/README.md#c-il-compiler)
+    - [C# AOT Compiler](https://github.com/FrankRay78/PatienceOS/blob/main/README.md#c-aot-compiler)
+  - [Commentary on the build environment](https://github.com/FrankRay78/PatienceOS/blob/main/README.md#commentary-on-the-build-environment)
+- [Blog posts](https://github.com/FrankRay78/PatienceOS/blob/main/README.md#blog-posts)
+
+---
+
 #### Commentary on the name
 PatienceOS was chosen to remind Frank this is a 12-month initial project (at least), as part of his [2024 professional development](https://frankray.net/blog/2023/11/writing-an-os-in-csharp-dotnet/) goals. The dopamine hit from quickly pushing out PR's, like he regularly enjoys from contributing to other open-source repos (eg. [spectre.console](https://github.com/spectreconsole/spectre.console)), simply won't be possible with OS development. Hence the need for patience, and perseverance.
 
