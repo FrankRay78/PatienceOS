@@ -32,7 +32,8 @@ Built using a combination of Microsoft's C# IL and native AOT compilers, and the
 PatienceOS was chosen to remind Frank this is a 12-month initial project (at least), as part of his [2024 professional development](https://frankray.net/blog/2023/11/writing-an-os-in-csharp-dotnet/) goals. The dopamine hit from quickly pushing out PR's, like he regularly enjoys from contributing to other open-source repos (eg. [spectre.console](https://github.com/spectreconsole/spectre.console)), simply won't be possible with OS development. Hence the need for patience, and perseverance.
 
 ## Progress
-The obligatory screenshot, which (at the moment), is pretty underwhelming I admit:
+PatienceOS isn't a fully-fledged 'operating system', but it does boot and is being actively developed. The obligatory screenshot (which is pretty underwhelming at the moment) is here:
+
 ![PatienceOS - boot splash](https://github.com/FrankRay78/PatienceOS/assets/52075808/4ffa65a2-9818-4502-a2cf-ceee99b70e93)
 
 As of 15 April 2024, PatienceOS is a 32-bit kernel that boots in protected mode on an emulated x86 machine. The bootstrap is written in assembly and supports the [Multiboot Specification](https://en.wikipedia.org/wiki/Multiboot_specification), version 2. The main kernel is written in C#, linked against a custom runtime library, and compiled to bare metal using the Microsoft .Net AOT compiler. There is a basic console class that supports writing characters to the screen in VGA text mode. Extensive unit tests have been written for the console and the underlying framebuffer video memory.
@@ -154,3 +155,7 @@ Environment | Findings
 
 ## Blog posts
 A series of blog posts are being written alongside the development of PatienceOS, to capture learnings and chart progress. See: [PatienceOS blog posts](https://frankray.net/blog/category/software-development/os-development/patienceos/)
+
+---
+
+**© Frank Ray**, owner of [Better Software UK](https://bettersoftware.uk), author of [Better Software Requirements](https://bettersoftwarerequirements.com): A handbook for software development teams and their managers.
