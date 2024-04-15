@@ -35,6 +35,8 @@ PatienceOS was chosen to remind Frank this is a 12-month initial project (at lea
 The obligatory screenshot, which (at the moment), is pretty underwhelming I admit:
 ![PatienceOS - boot splash](https://github.com/FrankRay78/PatienceOS/assets/52075808/4ffa65a2-9818-4502-a2cf-ceee99b70e93)
 
+As of 15 April 2024, PatienceOS is a 32-bit kernel that boots in protected mode on an emulated x86 machine. The bootstrap is written in assembly and supports the [Multiboot Specification](https://en.wikipedia.org/wiki/Multiboot_specification), version 2. The main kernel is written in C#, linked against the custom runtime library, and compiled to bare metal using the Microsoft .Net AOT compiler. There is a basic `Console` class that supports writing characters to the screen in VGA text mode. Extensive unit tests have been written for the console and the underlying framebuffer video memory.
+
 The most accurate list of features supported by the PatienceOS kernel is given in the description of each [Release](https://github.com/FrankRay78/PatienceOS/releases).
 
 > [!IMPORTANT]\
