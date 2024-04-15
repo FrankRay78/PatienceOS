@@ -1,5 +1,5 @@
 # PatienceOS
-A baremetal C# kernel - Frank Ray, [Better Software UK](https://bettersoftware.uk/).
+A baremetal C# kernel - Frank Ray, owner of [Better Software UK](https://bettersoftware.uk/) and author of [Better Software Requirements](https://bettersoftwarerequirements.com).
 
 Built using a combination of Microsoft's C# IL and native AOT compilers, and the GNU toolchain.
 
@@ -35,9 +35,9 @@ PatienceOS was chosen to remind Frank this is a 12-month initial project (at lea
 The obligatory screenshot, which (at the moment), is pretty underwhelming I admit:
 ![PatienceOS - boot splash](https://github.com/FrankRay78/PatienceOS/assets/52075808/4ffa65a2-9818-4502-a2cf-ceee99b70e93)
 
-As of 15 April 2024, PatienceOS is a 32-bit kernel that boots in protected mode on an emulated x86 machine. The bootstrap is written in assembly and supports the [Multiboot Specification](https://en.wikipedia.org/wiki/Multiboot_specification), version 2. The main kernel is written in C#, linked against the custom runtime library, and compiled to bare metal using the Microsoft .Net AOT compiler. There is a basic `Console` class that supports writing characters to the screen in VGA text mode. Extensive unit tests have been written for the console and the underlying framebuffer video memory.
+As of 15 April 2024, PatienceOS is a 32-bit kernel that boots in protected mode on an emulated x86 machine. The bootstrap is written in assembly and supports the [Multiboot Specification](https://en.wikipedia.org/wiki/Multiboot_specification), version 2. The main kernel is written in C#, linked against a custom runtime library, and compiled to bare metal using the Microsoft .Net AOT compiler. There is a basic console class that supports writing characters to the screen in VGA text mode. Extensive unit tests have been written for the console and the underlying framebuffer video memory.
 
-The most accurate list of features supported by the PatienceOS kernel is given in the description of each [Release](https://github.com/FrankRay78/PatienceOS/releases).
+See the description of each [Release](https://github.com/FrankRay78/PatienceOS/releases) for the most accurate list of features supported by the PatienceOS kernel.
 
 > [!IMPORTANT]\
 > Please upvote :+1: the [issues](https://github.com/FrankRay78/PatienceOS/issues) you are most interested in, the [Top Issues Dashboard](https://github.com/FrankRay78/PatienceOS/issues/5) tracks community interest. 
