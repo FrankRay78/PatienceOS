@@ -35,6 +35,8 @@ PatienceOS was chosen to remind Frank this is a 12-month initial project (at lea
 The obligatory screenshot, which (at the moment), is pretty underwhelming I admit:
 ![PatienceOS - boot splash](https://github.com/FrankRay78/PatienceOS/assets/52075808/4ffa65a2-9818-4502-a2cf-ceee99b70e93)
 
+The most accurate list of features supported by the PatienceOS kernel is given in the description of each [Release](https://github.com/FrankRay78/PatienceOS/releases).
+
 > [!IMPORTANT]\
 > Please upvote :+1: the [issues](https://github.com/FrankRay78/PatienceOS/issues) you are most interested in, the [Top Issues Dashboard](https://github.com/FrankRay78/PatienceOS/issues/5) tracks community interest. 
 
