@@ -1,5 +1,5 @@
 # PatienceOS
-A baremetal C# kernel - Frank Ray, owner of [Better Software UK](https://bettersoftware.uk/) and author of [Better Software Requirements](https://bettersoftwarerequirements.com).
+A baremetal C# kernel - Frank Ray, [Better Software UK](https://bettersoftware.uk/).
 
 Built using a combination of Microsoft's C# IL and native AOT compilers, and the GNU toolchain.
 
