@@ -3,7 +3,7 @@ A baremetal C# kernel - Frank Ray, [Better Software UK](https://bettersoftware.u
 
 Built using a combination of Microsoft's C# IL and native AOT compilers, and the GNU toolchain.
 
-[Blog posts](https://frankray.net/blog/category/software-development/os-development/patienceos/) are being written to capture learnings from PatienceOS and a [wiki](https://github.com/FrankRay78/PatienceOS/wiki) also exists, although largely a collection of working notes etc. The following README remains the best source of infrequently changing, production quality documentation.
+Learnings from PatienceOS are being captured in a series of [blog posts](https://frankray.net/blog/category/software-development/os-development/patienceos/), and a project [wiki](https://github.com/FrankRay78/PatienceOS/wiki) does exist, although remains largely a collection of working notes. The following README remains the best source of infrequently changing, production quality documentation.
 
 ---
 
@@ -15,18 +15,12 @@ Built using a combination of Microsoft's C# IL and native AOT compilers, and the
   - [Windows 10 Host](#windows-10-host)
   - [Installation](#installation)
   - [Configuration](#configuration)
-    - [ILC, the Native .Net AOT compiler](#ilc-the-native-net-aot-compiler)
-    - [MSYS2 MINGW64](#msys2-mingw64)
-    - [Build tool paths](#build-tool-paths)
   - [Booting](#booting)
 - [Developing PatienceOS](#developing-patienceos)
 - [Contributing](#contributing)
 - [Build toolchain](#build-toolchain)
   - [Commentary on the build process](#commentary-on-the-build-process)
-    - [C# IL Compiler](#c-il-compiler)
-    - [C# AOT Compiler](#c-aot-compiler)
   - [Commentary on the build environment](#commentary-on-the-build-environment)
-- [Blog posts](#blog-posts)
 
 ---
 
