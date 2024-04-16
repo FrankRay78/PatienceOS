@@ -3,6 +3,8 @@ A baremetal C# kernel - Frank Ray, [Better Software UK](https://bettersoftware.u
 
 Built using a combination of Microsoft's C# IL and native AOT compilers, and the GNU toolchain.
 
+[Blog posts](https://frankray.net/blog/category/software-development/os-development/patienceos/) are being written to capture learnings from PatienceOS and a [wiki](https://github.com/FrankRay78/PatienceOS/wiki) also exists, although largely a collection of working notes etc. The following README remains the best source of infrequently changing, production quality documentation.
+
 ---
 
 #### Table of contents
@@ -152,9 +154,6 @@ Environment | Findings
 `WSL only` | ilc, the .Net AOT compiler, doesn't seem to support 32-bit x86 compilation output on Linux, which I really want. OSDev Wiki agrees, saying *"If this is your first operating system project, you should do a 32-bit kernel first."*, see: [Bare Bones](https://wiki.osdev.org/Bare_Bones).
 `MSYS2/MINGW64` | Heaps of issues with spaces in path names, see [mingw make can't handle spaces in path?](https://stackoverflow.com/questions/5999507/mingw-make-cant-handle-spaces-in-path) as an example. Unfortunately, no amount of escaping, 8.3 shortening or quotes could get the csc compiler running from its default install location, C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\Roslyn\csc.exe
 `bflat` | bflat decides to output an executable when it finds a main() function, also seemingly without the intermediate object files. This is no good, given I also need to link in the compiled boot loader. (nb. with a bit of further effort, I suspect I might be able to include the bootloader asm directly in the csproj file, somehow)
-
-## Blog posts
-A series of blog posts are being written alongside the development of PatienceOS, to capture learnings and chart progress. See: [PatienceOS blog posts](https://frankray.net/blog/category/software-development/os-development/patienceos/)
 
 ---
 
