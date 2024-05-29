@@ -7,6 +7,11 @@ Learnings from PatienceOS are being captured in a series of [blog posts](https:/
 
 ---
 
+> [!IMPORTANT]\
+> Work on PatienceOS is currently on hold, for reasons described [here](https://frankray.net/blog/2024/05/patienceos-on-pause/).
+
+---
+
 #### Table of contents
 
 - [Commentary on the name](#commentary-on-the-name)
@@ -36,7 +41,7 @@ As of 15 April 2024, PatienceOS is a 32-bit kernel that boots in protected mode 
 
 See the description of each [Release](https://github.com/FrankRay78/PatienceOS/releases) for the most accurate list of features supported by the PatienceOS kernel.
 
-> [!IMPORTANT]\
+> [!TIP]\
 > Please upvote :+1: the [issues](https://github.com/FrankRay78/PatienceOS/issues) you are most interested in, the [Top Issues Dashboard](https://github.com/FrankRay78/PatienceOS/issues/5) tracks community interest. 
 
 ## Playing with PatienceOS
