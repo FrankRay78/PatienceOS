@@ -8,7 +8,7 @@ Learnings from PatienceOS are being captured in a series of [blog posts](https:/
 ---
 
 > [!IMPORTANT]\
-> Work on PatienceOS is currently on hold, for reasons described [here](https://frankray.net/blog/2024/05/patienceos-on-pause/).
+> PatienceOS has been superseded by [InstructionOS](https://github.com/FrankRay78/InstructionOS), an ANSI C kernel, for reasons described [here](https://frankray.net/blog/2024/05/patienceos-on-pause/).
 
 ---
 
